@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Cadastro";
+
+
+    if (Context.Request.Method == "POST")
+    {
+        string nome = Context.Request.Form["nome"];
+        string sobrenome = Context.Request.Form["sobrenome"];
+        string endereco = Context.Request.Form["endereco"];
+        string cidade = Context.Request.Form["cidade"];
+        string estado = Context.Request.Form["estado"];
+        string dataNasc = Context.Request.Form["dataNascimento"];
+        string email = Context.Request.Form["email"];
+        int telefone = int.Parse(Context.Request.Form["telefone"]);
+
+        <text>
+            You entered:
+            <br />
+            Nome: @nome
+            <br />
+            sobrenome: @sobrenome
+            <br />
+            Telefone: @telefone
+            <br />
+        </text>
+    }
+   
+        <div class="col-sm-3">
+      
+        </div>
+    
+
+    <div class="col-sm-6 align-content-center">
+        <div class="card" style="width: 100%;">
+            <form method="post">
+                <fieldset>
+                    <legend class="text-center">Cadastro Interessado</legend>
+                    <h4>Nome:</h4><input type="text" name="nome" value="" required />
+                    <h4>Sobrenome:</h4><input type="text" name="sobrenome" value="" required />
+                    <h4>Endereço:</h4><input type="text" name="endereco" value="" required />
+                    <h4>Cidade:</h4><input type="text" name="cidade" value="" required />
+                    <h4>Estado:</h4><input type="text" name="estado" value="" required />
+                    <h4>Data de Nascimento:</h4><input type="date" class="text-center" name="dataNascimento" value="" required />
+                    <h4>Email:</h4><input type="email" name="email" value="" required />
+                    <h4>Telefone:</h4><input type="tel" name="telefone" value="" required />
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Tipo Sangúineo</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>Não Sei</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>&nbsp;</label>
+                        <input type="submit" value="Submit" class="submit" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-sm-3">.col-sm-4</div>
+
+
+}
+
