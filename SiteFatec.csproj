@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\CalendarioEvento\" />
+    <Folder Include="Views\EntidadeColetora\" />
+    <Folder Include="Views\CedenteLocal\" />
+    <Folder Include="Views\Administrador\" />
+    <Folder Include="Views\Usuario\" />
+  </ItemGroup>
+
 </Project>
