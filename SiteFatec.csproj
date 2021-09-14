@@ -6,10 +6,16 @@
 
   <ItemGroup>
     <Folder Include="Views\CalendarioEvento\" />
-    <Folder Include="Views\EntidadeColetora\" />
     <Folder Include="Views\CedenteLocal\" />
     <Folder Include="Views\Administrador\" />
+    <Folder Include="Views\EntidadeColetora\" />
     <Folder Include="Views\Usuario\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.3" />
   </ItemGroup>
 
 </Project>
