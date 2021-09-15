@@ -16,5 +16,6 @@ namespace SiteFatec.Models
         public string dataNasc { get; set; }
         public int telefone { get; set; }
         public string cidadeDoacao { get; set; }
+        public string tipoSanguineo { get; set; }
     }
 }

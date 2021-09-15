@@ -5,6 +5,7 @@
     var doador = new Doador();
     if (Context.Request.Method == "POST")
     {
+        #region Obter dados do doador
         doador.nome = Context.Request.Form["nome"];
         doador.sobrenome = Context.Request.Form["sobrenome"];
         doador.endereco = Context.Request.Form["endereco"];
@@ -13,6 +14,8 @@
         doador.dataNasc = Context.Request.Form["dataNascimento"];
         doador.email = Context.Request.Form["email"];
         doador.telefone = int.Parse(Context.Request.Form["telefone"]);
+        doador.tipoSanguineo = Context.Request.Form["tipoSanguineo"];
+        #endregion
 
     }
 
@@ -23,7 +26,7 @@
             Dados inseridos: <br />
             Nome: @doador.nome<br />
             Sobrenome: @doador.sobrenome <br />
-            e outros
+            Sangue: @doador.tipoSanguineo
         </p>
     }
 
@@ -45,7 +48,7 @@
                     <h4>Telefone:</h4><input type="tel" name="telefone" value="" required />
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo Sangúineo</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="exampleFormControlSelect1" name="tipoSanguineo">
                             <option>Não Sei</option>
                             <option>A+</option>
                             <option>A-</option>
