@@ -12,4 +12,9 @@
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\img\estrelinhas.png" />
+  </ItemGroup>
+
 </Project>
