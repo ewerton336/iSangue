@@ -1,113 +1,86 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<link rel="stylesheet" href="~/css/style.css">
 
-<div class="principal">
+<body>
+<link rel="stylesheet" href="style.css">
+<div class="container" >
+    <a class="links" id="paracadastro"></a>
+    <a class="links" id="paralogin"></a>
+    
+    <div class="content">      
+      <!--FORMULÁRIO DE LOGIN-->
+      <div id="login">
+        <form method="post" action=""> 
+          <h1>Login</h1> 
+          <p> 
+            <label for="email_login">Seu e-mail</label>
+            <input id="email_login" name="email_login" required="required" type="text" placeholder="contato@htmlecsspro.com"/>
+          </p>
+          
+          <p> 
+            <label for="senha_login">Sua senha</label>
+            <input id="senha_login" name="senha_login" required="required" type="password" placeholder="1234" /> 
+          </p>
+          
+          <p> 
+            <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+            <label for="manterlogado">Manter-me logado</label>
+          </p>
+          
+          <p> 
+            <input type="submit" value="Logar" /> 
+          </p>
+          
+          <p class="link">
+            Ainda não tem conta?
+            <a href="#paracadastro">Cadastre-se</a>
+          </p>
+        </form>
+      </div>
 
-    <!--  Capa-->
-    <div class="capa">
-        <div class="card text-center ">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="~/img/estrelinhas.png" class="img-fluid" />
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                </a>
-            </div>
+      <!--FORMULÁRIO DE CADASTRO-->
+      <div id="cadastro">
+        <form method="post" action=""> 
+          <h1>Cadastro</h1> 
+          
+          <p> 
+            <label for="nome_cad">Seu nome</label>
+            <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Luiz Augusto" />
+          </p>
+          
+          <p> 
+            <label for="email_cad">Seu e-mail</label>
+            <input id="email_cad" name="email_cad" required="required" type="email" placeholder="contato@htmlecsspro.com"/> 
+          </p>
+          
+          <p> 
+            <label for="senha_cad">Sua senha</label>
+            <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="1234"/>
+          </p>
 
-            <div class="card-body">
-                <h5 class="card-title">Cadastro</h5>
-                <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad doloribus tempore corporis repellendus nesciunt. Molestiae cum culpa numquam porro maiores architecto officia ducimus, fuga nostrum laborum at voluptatum quidem dolorum!
-                </p>
-
-                <button type="button" class="btn btn-outline-info">Informações</button>
-                <button type="button" class="btn btn-outline-info">Cadastro</button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="formulario mt-5">
-        <form>
-            <h2 class="display-2 text-center">Cadastro</h2>
-            <!-- caixas de texto -->
-            <div class="form-group">
-                <label for="usuario">Usuário</label>
-                <input class="form-control " type="text" id="usuario" placeholder="Digite seu usuário">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input class="form-control" type="email" id="email" placeholder="Digite seu email" readonly>
-                <small class="form-text">Email será validado</small>
-            </div>
-            <!-- select -->
-            <div class="form-group">
+           <p> 
                 <label for="estados">Estados</label>
-                <select class="form-control" id="estados">
+                <select class="form-control" id="estados" required="required">
                     <option>Acre</option>
                     <option>Alagoas</option>
                     <option>Amapá</option>
                     <option>...</option>
                 </select>
-            </div>
-            <!-- textarea -->
-            <div class="form-group">
-                <label for="mensagem">Mensagem</label>
-                <textarea class="form-control" id="mensagem" rows="3"></textarea>
-            </div>
-            <!-- file input -->
-            <div class="form-group">
-                <label for="arquivo">Arquivo</label>
-                <input class="form-control-file" type="file" id="arquivo">
-            </div>
-            <!-- custom file input -->
-            <div class="custom-file">
-                <label class="custom-file-label">Selecione arquivo</label>
-                <input class="custom-file-input" type="file" id="arquivo">
-            </div>
-            <br><br>
-            <!-- range -->
-            <div class="form-group">
-                <label id="range">Satisfação</label>
-                <input class="custom-range" type="range" id="range" min="1" max="1000">
-            </div>
-            <!-- button -->
-            <input class="btn btn-primary " type="submit" value="Salvar">
+             </p> 
+          
+          <p> 
+            <input type="submit" value="Cadastrar"/> 
+          </p>
+          
+          <p class="link">  
+            Já tem conta?
+            <a href="#paralogin"> Ir para Login </a>
+          </p>
         </form>
-        <br><br>
-        <!-- Formulário inline -->
-        <form class="form-inline">
-            <input class="form-control mr-2" type="email" placeholder="Digite seu usuário">
-            <input class="form-control mr-2" type="password" placeholder="Digite sua senha">
-            <input class="btn btn-primary" type="submit" value="Logar">
-        </form>
-        <br><br>
-        <!--
-        Validação de formulário
-        Classes: is-valid, is-invalid, invalid-feedback
-        -->
-        <form>
-            <div class="form-group">
-                <label for="email-usuario">email</label>
-                <input class="form-control is-valid" type="text" id="email-usuario" placeholder="Digite seu e-mail">
-                <div class="valid-feedback">
-                    Email válido
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="senha-usuario">Senha</label>
-                <input class="form-control is-invalid" type="email" id="senha-usuario"
-                       placeholder="Digite sua senha">
-                <div class="invalid-feedback">
-                    Senha inválida
-                </div>
-            </div>
-            <input class="btn btn-primary" type="submit" value="Logar">
-        </form>
+      </div>
     </div>
-</div>
-
-
+  </div> 
+</body>
 
