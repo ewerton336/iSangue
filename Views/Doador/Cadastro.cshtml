@@ -5,10 +5,11 @@
     var cusao = new DoadorDao(Helper.DBConnectionSql);
     var oi = cusao.GetDoadores();
 
+    #region Obter dados do doador
     var doador = new Doador();
     if (Context.Request.Method == "POST")
     {
-        #region Obter dados do doador
+
         doador.nome = Context.Request.Form["nome"];
         doador.sobrenome = Context.Request.Form["sobrenome"];
         doador.endereco = Context.Request.Form["endereco"];
