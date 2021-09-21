@@ -4,15 +4,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace SiteFatec.DAO
 {
     public class DaoConexao : IDisposable
     {
         public IDbConnection DbConnection { get; private set; }
-        public DaoConexao(IDbConnection dbConnection)
+        public DaoConexao(MySqlConnection dbConnection)
         {
-            dbConnection.ConnectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XEPDB1)));User Id=system;Password=123456;"; ;
+            dbConnection.ConnectionString = "Server=database-isangue.cxnmn6g8w0jv.sa-east-1.rds.amazonaws.com;Database=iSangue;uid=isangue;pwd=Sanguelit12;";
+            
 
             if (dbConnection.State != ConnectionState.Open)
             {

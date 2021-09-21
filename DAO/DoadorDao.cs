@@ -6,19 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SiteFatec.Models;
+using MySql.Data.MySqlClient;
 
 namespace SiteFatec.DAO
 {
     public class DoadorDao : DaoConexao
     {
-        public DoadorDao(IDbConnection dbConnection) : base(dbConnection)
+        public DoadorDao(MySqlConnection dbConnection) : base(dbConnection)
         {
         }
         public IEnumerable<string> GetDoadores()
         {
             try
             {
-                string SQL = @"SELECT * FROM T2S.RASTREAMENTO_CORREIOS";
+                string SQL = @"SELECT * FROM usuario";
                 var result = DbConnection.Query<string>(SQL);
                 return result;
             }
@@ -36,8 +37,8 @@ namespace SiteFatec.DAO
             var sql = @"INSERT INTO ISANGUE.DOADOR
                         ( NOME, SOBRENOME, ENDERECO, NUMERO_RESIDENCIA, CIDADE_RESIDENCIA
                         ,ESTADO_REDIENCIA, DATA_NASCIMENTO, TELEFONE, CIDADE_DOACAO, TIPO_SANGUINEO)
-                         VALUES(:NOME, :SOBRENOME, :ENDERECO, :NUMRESIDENCIA, :CIDADERESIDENCIA, :ESTADORESIDENCIA
-                        ,:DTNASCIMENTO, :TELEFONE, :CIDADE_DOACAO, :TIPOSANGUINEO); ";
+                         VALUES(@NOME, @SOBRENOME, @ENDERECO, @NUMRESIDENCIA, @CIDADERESIDENCIA, @ESTADORESIDENCIA
+                        ,@DTNASCIMENTO, @TELEFONE, @CIDADE_DOACAO, @TIPOSANGUINEO); ";
             var execute = DbConnection.Execute(sql, new 
             {   NOME = doador.nome, 
                 SOBRENOME = doador.sobrenome, 

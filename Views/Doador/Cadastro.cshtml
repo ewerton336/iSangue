@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Cadastro de Doador";
     @using SiteFatec.Models;
+    @using SiteFatec.DAO;
+    var cusao = new DoadorDao(Helper.DBConnectionSql);
+    var oi = cusao.GetDoadores();
 
     var doador = new Doador();
     if (Context.Request.Method == "POST")
