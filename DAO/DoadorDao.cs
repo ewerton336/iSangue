@@ -35,21 +35,22 @@ namespace SiteFatec.DAO
         public void InserirDoador(Doador doador)
         {
             var sql = @"INSERT INTO ISANGUE.DOADOR
-                        ( NOME, SOBRENOME, ENDERECO, NUMERO_RESIDENCIA, CIDADE_RESIDENCIA
+                        ( NOME, SOBRENOME, ENDERECO, NUMERO_RESIDENCIA, COMPLEMENTO CIDADE_RESIDENCIA
                         ,ESTADO_REDIENCIA, DATA_NASCIMENTO, TELEFONE, CIDADE_DOACAO, TIPO_SANGUINEO)
-                         VALUES(@NOME, @SOBRENOME, @ENDERECO, @NUMRESIDENCIA, @CIDADERESIDENCIA, @ESTADORESIDENCIA
+                         VALUES(@NOME, @SOBRENOME, @ENDERECO, @NUMRESIDENCIA, @COMPLEMENTO, @CIDADERESIDENCIA, @ESTADORESIDENCIA
                         ,@DTNASCIMENTO, @TELEFONE, @CIDADE_DOACAO, @TIPOSANGUINEO); ";
             var execute = DbConnection.Execute(sql, new 
             {   NOME = doador.nome, 
                 SOBRENOME = doador.sobrenome, 
                 ENDERECO = doador.endereco,
                 NUMRESIDENCIA = doador.numeroResidencia, 
+                COMPLEMENTO = doador.complemento,
                 CIDADERESIDENCIA = doador.cidadeResidencia,
                 ESTADORESIDENCIA = doador.estadoResidencia, 
                 DTNASCIMENTO = doador.dataNasc, 
                 TELEFONE = doador.telefone, 
                 CIDADE_DOACAO = doador.cidadeDoacao, 
-                TIPOSANGUINEO = doador.tipoSanguineo});
+                TIPOSANGUINEO = doador.tipoSanguineo});;
         }
     }
 }
