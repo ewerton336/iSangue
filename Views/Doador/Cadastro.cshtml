@@ -2,6 +2,7 @@
     ViewData["Title"] = "Cadastro de Doador";
     @using SiteFatec.Models;
     @using SiteFatec.DAO;
+    @using SiteFatec.Controllers;
     var cusao = new DoadorDao(Helper.DBConnectionSql);
     var oi = cusao.GetDoadores();
 
@@ -13,33 +14,30 @@
         doador.nome = Context.Request.Form["nome"];
         doador.sobrenome = Context.Request.Form["sobrenome"];
         doador.endereco = Context.Request.Form["endereco"];
-
+        doador.numeroResidencia = int.Parse(Context.Request.Form["numeroResidencia"]);
+        doador.complemento = Context.Request.Form["complemento"];
         doador.cidadeResidencia = Context.Request.Form["cidade"];
-
         doador.cidadeDoacao = Context.Request.Form["cidade"];
 
         doador.estadoResidencia = Context.Request.Form["estado"];
         doador.dataNasc = Context.Request.Form["dataNascimento"];
         doador.email = Context.Request.Form["email"];
+        doador.senha = Context.Request.Form["senha"];
         doador.telefone = int.Parse(Context.Request.Form["telefone"]);
         doador.tipoSanguineo = Context.Request.Form["tipoSanguineo"];
         #endregion
 
+        {
+            if (doador.nome != null)
+            {
+
+                new DoadorController().Create(doador);
+            }
+        }
     }
 
-<div class="col-sm-3">
-    @if (doador.nome != null)
-    {
-        <p>
-            Dados inseridos: <br />
-            Nome: @doador.nome<br />
-            Sobrenome: @doador.sobrenome <br />
-            Sangue: @doador.tipoSanguineo
-        </p>
-    }
+    <div class="col-sm-3"></div>
 
-</div>
-    
 
     <div class="col-sm-6 align-content-center">
         <div class="card" style="width: 100%;">
@@ -49,10 +47,13 @@
                     <h4>Nome:</h4><input type="text" name="nome" value="" required />
                     <h4>Sobrenome:</h4><input type="text" name="sobrenome" value="" required />
                     <h4>Endereço:</h4><input type="text" name="endereco" value="" required />
+                    <h4>Numero da Residência:</h4><input type="number" name="numeroResidencia" value="" required />
+                    <h4>Complemento:</h4><input type="text" name="complemento" value=""/>
                     <h4>Cidade:</h4><input type="text" name="cidade" value="" required />
                     <h4>Estado:</h4><input type="text" name="estado" value="" required />
                     <h4>Data de Nascimento:</h4><input type="date" class="text-center" name="dataNascimento" value="" required />
                     <h4>Email:</h4><input type="email" name="email" value="" required />
+                    <h4>Senha:</h4><input type="password" name="senha" value="" required />
                     <h4>Telefone:</h4><input type="tel" name="telefone" value="" required />
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo Sangúineo</label>

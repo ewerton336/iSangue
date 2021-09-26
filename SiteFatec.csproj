@@ -9,6 +9,7 @@
     <Folder Include="Views\CedenteLocal\" />
     <Folder Include="Views\Administrador\" />
     <Folder Include="Views\EntidadeColetora\" />
+    <Folder Include="Views\Administrador\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
 

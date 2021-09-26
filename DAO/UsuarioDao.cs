@@ -13,14 +13,18 @@ namespace SiteFatec.DAO
         {
         }
 
-        public int InserirUsuario ( string email, string senha)
+        public object InserirUsuario ( string email, string senha)
         {
-            string sql = @"INSERT INTO USUARIO
-                           (email 
-                            ,senha)
-                            VALUES(@EMAIL 
-                            ,@SENHA)";
-            var execute = DbConnection.Execute(sql, new { EMAIL = email, SENHA = senha });
+            string sql = @"INSERT INTO USUARIO(
+                            EMAIL 
+                            ,SENHA
+                            ,TIPO_USUARIO
+                               )
+                            VALUES(
+                            @EMAIL 
+                            ,@SENHA
+                            ,'USUARIO')";
+            var execute = DbConnection.ExecuteScalar(sql, new { EMAIL = email, SENHA = senha });
             return execute;
         }
 
