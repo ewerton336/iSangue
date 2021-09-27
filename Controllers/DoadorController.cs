@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SiteFatec.Controllers;
-namespace SiteFatec.DAO;
+
+
+namespace SiteFatec.DAO
 {
     public class DoadorController : Controller
     {
