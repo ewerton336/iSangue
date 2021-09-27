@@ -23,7 +23,17 @@ namespace SiteFatec.Controllers
             return View();
         }
 
+        public IActionResult Inicio()
+        {
+            return View();
+        }
+
         public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        public IActionResult Sobre()
         {
             return View();
         }
