@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace SiteFatec.Controllers
+using SiteFatec.Controllers;
+namespace SiteFatec.DAO;
 {
     public class DoadorController : Controller
     {
@@ -22,8 +22,10 @@ namespace SiteFatec.Controllers
         }
 
         // GET: DoadorController/Create
-        public ActionResult Create()
+        public ActionResult Create(Models.Doador doador)
         {
+            new UsuarioDao(Helper.DBConnectionSql).InserirUsuario(doador.email, doador.senha);
+            new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador);
             return View();
         }
 

@@ -19,7 +19,7 @@ namespace SiteFatec.DAO
         {
             try
             {
-                string SQL = @"SELECT * FROM usuario";
+                string SQL = @"SELECT * FROM USUARIO";
                 var result = DbConnection.Query<string>(SQL);
                 return result;
             }
@@ -34,22 +34,68 @@ namespace SiteFatec.DAO
 
         public void InserirDoador(Doador doador)
         {
-            var sql = @"INSERT INTO ISANGUE.DOADOR
-                        ( NOME, SOBRENOME, ENDERECO, NUMERO_RESIDENCIA, CIDADE_RESIDENCIA
-                        ,ESTADO_REDIENCIA, DATA_NASCIMENTO, TELEFONE, CIDADE_DOACAO, TIPO_SANGUINEO)
-                         VALUES(@NOME, @SOBRENOME, @ENDERECO, @NUMRESIDENCIA, @CIDADERESIDENCIA, @ESTADORESIDENCIA
-                        ,@DTNASCIMENTO, @TELEFONE, @CIDADE_DOACAO, @TIPOSANGUINEO); ";
-            var execute = DbConnection.Execute(sql, new 
-            {   NOME = doador.nome, 
-                SOBRENOME = doador.sobrenome, 
-                ENDERECO = doador.endereco,
-                NUMRESIDENCIA = doador.numeroResidencia, 
-                CIDADERESIDENCIA = doador.cidadeResidencia,
-                ESTADORESIDENCIA = doador.estadoResidencia, 
-                DTNASCIMENTO = doador.dataNasc, 
-                TELEFONE = doador.telefone, 
-                CIDADE_DOACAO = doador.cidadeDoacao, 
-                TIPOSANGUINEO = doador.tipoSanguineo});
+            try
+            {
+                var sqlUsuario = "SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
+                var id = DbConnection.Query<int>(sqlUsuario, new { EMAIL = doador.email });
+
+                var sql = @"INSERT INTO iSangueDB.DOADOR
+                            (NOME
+                            , SOBRENOME
+                            , ENDERECO
+                            , NUMERO_RESIDENCIA
+                            , COMPLEMENTO
+                            , CIDADE_RESIDENCIA
+                            , ESTADO_RESIDENCIA
+                            , DATA_NASCIMENTO
+                            , TELEFONE
+                            , CIDADE_DOACAO
+                            , TIPO_SANGUINEO)
+                       VALUES(
+                                 @NOME
+                               , @SOBRENOME
+                               , @ENDERECO
+                               , @NUMERO_RESIDENCIA
+                               , @COMPLEMENTO
+                               , @CIDADE_RESIDENCIA
+                               , @ESTADO_RESIDENCIA
+                               , @DATA_NASCIMENTO
+                               , @TELEFONE
+                               , @CIDADE_DOACAO
+                               , @TIPO_SANGUINEO
+
+
+
+)";
+                var execute = DbConnection.Execute(sql, new
+                {
+                    NOME = doador.nome,
+                    SOBRENOME = doador.sobrenome,
+                    ENDERECO = doador.endereco,
+                    NUMERO_RESIDENCIA = doador.numeroResidencia,
+                    COMPLEMENTO = doador.complemento,
+                    CIDADE_RESIDENCIA = doador.cidadeResidencia,
+                    ESTADO_RESIDENCIA = doador.estadoResidencia,
+                    DATA_NASCIMENTO = doador.dataNasc,
+                    TELEFONE = doador.telefone,
+                    CIDADE_DOACAO = doador.cidadeDoacao,
+                    TIPO_SANGUINEO = doador.tipoSanguineo
+                }); ;
+
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+
+
+
+
+
+
     }
 }
