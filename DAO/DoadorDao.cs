@@ -20,7 +20,20 @@ namespace iSangue.DAO
         {
             try
             {
-                string SQL = @"SELECT * FROM DOADOR";
+                string SQL = @"SELECT
+                                ID
+                                ,NOME nome
+                                ,SOBRENOME sobrenome
+                                ,ENDERECO endereco
+                                ,NUMERO_RESIDENCIA numeroResidencia
+                                ,COMPLEMENTO complemento
+                                ,CIDADE_RESIDENCIA cidadeResidencia
+                                ,ESTADO_RESIDENCIA estadoResidencia
+                                ,DATA_NASCIMENTO dataNasc
+                                ,TELEFONE telefone
+                                ,CIDADE_DOACAO cidadeDoacao
+                                ,TIPO_SANGUINEO tipoSanguineo
+                                FROM DOADOR";
                 var result = DbConnection.Query<Doador>(SQL);
                 return result;
             }
@@ -32,12 +45,26 @@ namespace iSangue.DAO
         }
 
 
-        public IEnumerable<Doador> GetDoadorById(int id)
+        public Doador GetDoadorById(int id)
         {
             try
             {
-                string SQL = @"SELECT * FROM DOADOR WHERE ID = @ID";
-                var result = DbConnection.Query<Doador>(SQL, new { ID = id });
+                string SQL = @"SELECT
+                                 ID
+                                ,NOME nome
+                                ,SOBRENOME sobrenome
+                                ,ENDERECO endereco
+                                ,NUMERO_RESIDENCIA numeroResidencia
+                                ,COMPLEMENTO complemento
+                                ,CIDADE_RESIDENCIA cidadeResidencia
+                                ,ESTADO_RESIDENCIA estadoResidencia
+                                ,DATA_NASCIMENTO dataNasc
+                                ,TELEFONE telefone
+                                ,CIDADE_DOACAO cidadeDoacao
+                                ,TIPO_SANGUINEO tipoSanguineo
+                                ,USUARIO_ID_FK usuarioId
+                                FROM DOADOR WHERE ID = @ID";
+                var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
                 return result;
             }
             catch (Exception e)
@@ -50,12 +77,12 @@ namespace iSangue.DAO
 
 
 
-        public void InserirDoador(Doador doador)
+        public void InserirDoador(Doador doador, int idUsuario)
         {
             try
             {
-                var sqlUsuario = "SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
-                var id = DbConnection.Query<int>(sqlUsuario, new { EMAIL = doador.email });
+              //  var sqlUsuario = "SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
+                //var id = DbConnection.Query<int>(sqlUsuario, new { EMAIL = doador.email });
 
                 var sql = @"INSERT INTO iSangueDB.DOADOR
                             (NOME
@@ -81,7 +108,8 @@ namespace iSangue.DAO
                                , @TELEFONE
                                , @CIDADE_DOACAO
                                , @TIPO_SANGUINEO
-
+                               
+            
 
 
 )";
@@ -97,7 +125,10 @@ namespace iSangue.DAO
                     DATA_NASCIMENTO = doador.dataNasc,
                     TELEFONE = doador.telefone,
                     CIDADE_DOACAO = doador.cidadeDoacao,
-                    TIPO_SANGUINEO = doador.tipoSanguineo
+                    TIPO_SANGUINEO = doador.tipoSanguineo,
+                    
+
+
                 }); ;
 
 

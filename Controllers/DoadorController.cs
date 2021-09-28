@@ -15,11 +15,12 @@ namespace iSangue.Controllers
     {
         private readonly iSangueContext _context;
         private readonly DoadorDao doadorDao;
-
+        private readonly UsuarioDao usuarioDao;
         public DoadorController(iSangueContext context)
         {
             _context = context;
             doadorDao = new DoadorDao(Helper.DBConnectionSql);
+            usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
         }
 
         // GET: Doador
@@ -61,8 +62,9 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                new UsuarioDao(Helper.DBConnectionSql).InserirUsuario(doador.email, doador.senha);
-                new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador);
+                usuarioDao.InserirUsuario(doador.email, doador.senha, "DOADOR");
+                int idCriada = usuarioDao.getIdByEmail(doador.email);
+                new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(doador);

@@ -12,9 +12,9 @@ namespace iSangue.DAO
         {
         }
 
-        public object InserirUsuario ( string email, string senha)
+        public object InserirUsuario( string email, string senha, string tipoUsuario)
         {
-            string sql = @"INSERT INTO USUARIO(
+            var sql = @"INSERT INTO USUARIO(
                             EMAIL 
                             ,SENHA
                             ,TIPO_USUARIO
@@ -22,11 +22,18 @@ namespace iSangue.DAO
                             VALUES(
                             @EMAIL 
                             ,@SENHA
-                            ,'USUARIO')";
-            var execute = DbConnection.ExecuteScalar(sql, new { EMAIL = email, SENHA = senha });
+                            ,@TIPO_USUARIO)";
+            var execute = DbConnection.Execute(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
             return execute;
         }
 
+        public int getIdByEmail (string email)
+        {
+            var sql = @"SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
+            var result = DbConnection.QueryFirstOrDefault<int>(sql, new { EMAIL = email });
+
+            return result;
+        }
 
 
     }
