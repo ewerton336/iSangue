@@ -8,9 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SiteFatec.DAO;
+using Microsoft.EntityFrameworkCore;
+using iSangue.Data;
 
-namespace SiteFatec
+namespace iSangue
 {
     public class Startup
     {
@@ -27,6 +28,9 @@ namespace SiteFatec
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<iSangueContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("iSangueContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

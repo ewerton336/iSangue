@@ -1,9 +1,10 @@
-﻿using System;
+﻿using iSangue.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiteFatec.Models
+namespace iSangue.Models
 {
     public class Entidadecoletora : Usuario
     {

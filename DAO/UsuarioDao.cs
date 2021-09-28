@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SiteFatec.Models;
 using MySql.Data.MySqlClient;
 using Dapper;
-namespace SiteFatec.DAO
+namespace iSangue.DAO
 {
     public class UsuarioDao : DaoConexao
     {

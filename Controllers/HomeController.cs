@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iSangue.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SiteFatec.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiteFatec.Controllers
+namespace Isangue.Controllers
 {
     public class HomeController : Controller
     {

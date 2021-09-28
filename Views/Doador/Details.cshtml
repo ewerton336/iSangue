@@ -1,0 +1,96 @@
+﻿@model iSangue.Models.Doador
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Doador</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sobrenome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sobrenome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.endereco)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.endereco)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.numeroResidencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.numeroResidencia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.complemento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.complemento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cidadeResidencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cidadeResidencia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.estadoResidencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.estadoResidencia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataNasc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataNasc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cidadeDoacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cidadeDoacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tipoSanguineo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tipoSanguineo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.senha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.senha)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

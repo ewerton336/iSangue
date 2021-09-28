@@ -5,10 +5,11 @@ using Dapper;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SiteFatec.Models;
 using MySql.Data.MySqlClient;
+using iSangue.Models;
+using iSangue.Models;
 
-namespace SiteFatec.DAO
+namespace iSangue.DAO
 {
     public class DoadorDao : DaoConexao
     {

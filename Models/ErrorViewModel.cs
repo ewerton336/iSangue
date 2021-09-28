@@ -1,6 +1,6 @@
 using System;
 
-namespace SiteFatec.Models
+namespace iSangue.Models
 {
     public class ErrorViewModel
     {

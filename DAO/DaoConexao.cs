@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
-namespace SiteFatec.DAO
+namespace iSangue.DAO
 {
     public class DaoConexao : IDisposable
     {

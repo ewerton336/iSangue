@@ -1,0 +1,107 @@
+﻿@model IEnumerable<iSangue.Models.Doador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sobrenome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroResidencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.complemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cidadeResidencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estadoResidencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataNasc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cidadeDoacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoSanguineo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.senha)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sobrenome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeroResidencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complemento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cidadeResidencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estadoResidencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataNasc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cidadeDoacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoSanguineo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.senha)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,94 @@
+﻿@model iSangue.Models.Doador
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Doador</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nome" class="control-label"></label>
+                <input asp-for="nome" class="form-control" />
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sobrenome" class="control-label"></label>
+                <input asp-for="sobrenome" class="form-control" />
+                <span asp-validation-for="sobrenome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="endereco" class="control-label"></label>
+                <input asp-for="endereco" class="form-control" />
+                <span asp-validation-for="endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numeroResidencia" class="control-label"></label>
+                <input asp-for="numeroResidencia" class="form-control" />
+                <span asp-validation-for="numeroResidencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="complemento" class="control-label"></label>
+                <input asp-for="complemento" class="form-control" />
+                <span asp-validation-for="complemento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cidadeResidencia" class="control-label"></label>
+                <input asp-for="cidadeResidencia" class="form-control" />
+                <span asp-validation-for="cidadeResidencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estadoResidencia" class="control-label"></label>
+                <input asp-for="estadoResidencia" class="form-control" />
+                <span asp-validation-for="estadoResidencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataNasc" class="control-label"></label>
+                <input asp-for="dataNasc" class="form-control" />
+                <span asp-validation-for="dataNasc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefone" class="control-label"></label>
+                <input asp-for="telefone" class="form-control" />
+                <span asp-validation-for="telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cidadeDoacao" class="control-label"></label>
+                <input asp-for="cidadeDoacao" class="form-control" />
+                <span asp-validation-for="cidadeDoacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tipoSanguineo" class="control-label"></label>
+                <input asp-for="tipoSanguineo" class="form-control" />
+                <span asp-validation-for="tipoSanguineo" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="senha" class="control-label"></label>
+                <input asp-for="senha" class="form-control" />
+                <span asp-validation-for="senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

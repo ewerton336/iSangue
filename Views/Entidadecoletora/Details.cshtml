@@ -1,0 +1,54 @@
+﻿@model iSangue.Models.Entidadecoletora
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Entidadecoletora</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.enderecoComercial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.enderecoComercial)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nomeResponsavel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nomeResponsavel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.senha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.senha)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
