@@ -29,8 +29,45 @@ namespace iSangue.Controllers
             return View(doadorDao.GetDoadores());
         }
 
-        // GET: Doador/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> LoginError()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> LoginSucess()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("email,senha")] Doador doador)
+        {
+            var login = doadorDao.LoginDoador(doador.email, doador.senha);
+            if (login != null)
+            {
+                return RedirectToAction(nameof(LoginSucess));
+            }
+            else 
+            {
+                return RedirectToAction(nameof(LoginError));
+            }
+            
+        }
+
+
+
+
+
+            // GET: Doador/Details/5
+            public async Task<IActionResult> Details(int id)
         {
             if (id == 0)
             {
@@ -63,7 +100,7 @@ namespace iSangue.Controllers
             if (ModelState.IsValid)
             {
                 usuarioDao.InserirUsuario(doador.email, doador.senha, "DOADOR");
-                int idCriada = usuarioDao.getIdByEmail(doador.email);
+                int idCriada = usuarioDao.getIdByEmail(doador.email); // NÃO CONSEGUI FAZER A FOREIGN KEY
                 new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }

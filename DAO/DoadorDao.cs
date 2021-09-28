@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using iSangue.Models;
-using iSangue.Models;
 
 namespace iSangue.DAO
 {
@@ -62,7 +61,6 @@ namespace iSangue.DAO
                                 ,TELEFONE telefone
                                 ,CIDADE_DOACAO cidadeDoacao
                                 ,TIPO_SANGUINEO tipoSanguineo
-                                ,USUARIO_ID_FK usuarioId
                                 FROM DOADOR WHERE ID = @ID";
                 var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
                 return result;
@@ -140,7 +138,16 @@ namespace iSangue.DAO
             }
         }
 
-
+        public Doador LoginDoador (string email, string senha)
+        {
+            var sql = @"SELECT EMAIL
+                        ,SENHA
+                        FROM USUARIO
+                        WHERE EMAIL = @EMAIL
+                        AND SENHA = @SENHA";
+            var execute = DbConnection.QueryFirstOrDefault<Doador>(sql, new {EMAIL = email, SENHA = senha });
+            return execute;
+        }
 
 
 
