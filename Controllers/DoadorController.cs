@@ -14,28 +14,30 @@ namespace iSangue.Controllers
     public class DoadorController : Controller
     {
         private readonly iSangueContext _context;
+        private readonly DoadorDao doadorDao;
 
         public DoadorController(iSangueContext context)
         {
             _context = context;
+            doadorDao = new DoadorDao(Helper.DBConnectionSql);
         }
 
         // GET: Doador
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Doador.ToListAsync());
+            return View(doadorDao.GetDoadores());
         }
 
         // GET: Doador/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var doador = await _context.Doador
-                .FirstOrDefaultAsync(m => m.id == id);
+            var doador = doadorDao.GetDoadorById(id);
+
             if (doador == null)
             {
                 return NotFound();

@@ -38,9 +38,44 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Teste">Teste</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doador" asp-action="Cadastro">Cadastro</a>
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Doador
+                            </a>
+                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
+                            </div>
                         </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entidade Coletora
+                            </a>
+                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
+                            </div>
+                        </li>
+
+
+
+
+
+
+
+
+
                     </ul>
                 </div>
             </div>

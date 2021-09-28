@@ -16,12 +16,12 @@ namespace iSangue.DAO
         public DoadorDao(MySqlConnection dbConnection) : base(dbConnection)
         {
         }
-        public IEnumerable<string> GetDoadores()
+        public IEnumerable<Doador> GetDoadores()
         {
             try
             {
-                string SQL = @"SELECT * FROM USUARIO";
-                var result = DbConnection.Query<string>(SQL);
+                string SQL = @"SELECT * FROM DOADOR";
+                var result = DbConnection.Query<Doador>(SQL);
                 return result;
             }
             catch (Exception e)
@@ -30,6 +30,23 @@ namespace iSangue.DAO
             }
 
         }
+
+
+        public IEnumerable<Doador> GetDoadorById(int id)
+        {
+            try
+            {
+                string SQL = @"SELECT * FROM DOADOR WHERE ID = @ID";
+                var result = DbConnection.Query<Doador>(SQL, new { ID = id });
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
 
 
 
