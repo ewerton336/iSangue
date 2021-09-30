@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using iSangue.Models;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
+
 
 namespace iSangue.Data
 {

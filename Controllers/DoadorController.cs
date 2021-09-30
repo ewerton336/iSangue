@@ -108,14 +108,14 @@ namespace iSangue.Controllers
         }
 
         // GET: Doador/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var doador = await _context.Doador.FindAsync(id);
+            var doador = doadorDao.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -139,8 +139,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    _context.Update(doador);
-                    await _context.SaveChangesAsync();
+                    doadorDao.AtualizarDoador(doador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
