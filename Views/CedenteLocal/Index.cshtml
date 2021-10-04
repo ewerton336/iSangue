@@ -1,4 +1,4 @@
-﻿@model IEnumerable<iSangue.Models.Doador>
+﻿@model IEnumerable<iSangue.Models.CedenteLocal>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,26 +16,20 @@
                 @Html.DisplayNameFor(model => model.nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.sobrenome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dataNasc)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.telefone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cidadeDoacao)
+                @Html.DisplayNameFor(model => model.endereco)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipoSanguineo)
+                @Html.DisplayNameFor(model => model.responsavel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.email)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.senha)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.tipoUsuario)
             </th>
@@ -49,33 +43,27 @@
                 @Html.DisplayFor(modelItem => item.nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.sobrenome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dataNasc)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.telefone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cidadeDoacao)
+                @Html.DisplayFor(modelItem => item.endereco)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tipoSanguineo)
+                @Html.DisplayFor(modelItem => item.responsavel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.email)
             </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.senha)
-        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.senha)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.tipoUsuario)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.idDoador">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idDoador">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idDoador">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }

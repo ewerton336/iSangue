@@ -1,87 +1,153 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using iSangue.Data;
+using iSangue.Models;
 
 namespace iSangue.Controllers
 {
     public class CedenteLocalController : Controller
     {
-        // GET: CedenteLocalController
-        public ActionResult Index()
+        private readonly iSangueContext _context;
+
+        public CedenteLocalController(iSangueContext context)
+        {
+            _context = context;
+        }
+
+        // GET: CedenteLocal
+        public async Task<IActionResult> Index()
         {
             return View();
         }
 
-        // GET: CedenteLocalController/Details/5
-        public ActionResult Details(int id)
+        // GET: CedenteLocal/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cedenteLocal = await _context.CedenteLocal
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (cedenteLocal == null)
+            {
+                return NotFound();
+            }
+
+            return View(cedenteLocal);
+        }
+
+        // GET: CedenteLocal/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: CedenteLocalController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CedenteLocalController/Create
+        // POST: CedenteLocal/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("nome,telefone,endereco,responsavel,id,email,senha,tipoUsuario")] CedenteLocal cedenteLocal)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(cedenteLocal);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(cedenteLocal);
         }
 
-        // GET: CedenteLocalController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: CedenteLocal/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cedenteLocal = await _context.CedenteLocal.FindAsync(id);
+            if (cedenteLocal == null)
+            {
+                return NotFound();
+            }
+            return View(cedenteLocal);
         }
 
-        // POST: CedenteLocalController/Edit/5
+        // POST: CedenteLocal/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("nome,telefone,endereco,responsavel,id,email,senha,tipoUsuario")] CedenteLocal cedenteLocal)
         {
-            try
+            if (id != cedenteLocal.id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(cedenteLocal);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CedenteLocalExists(cedenteLocal.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(cedenteLocal);
         }
 
-        // GET: CedenteLocalController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: CedenteLocal/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cedenteLocal = await _context.CedenteLocal
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (cedenteLocal == null)
+            {
+                return NotFound();
+            }
+
+            return View(cedenteLocal);
         }
 
-        // POST: CedenteLocalController/Delete/5
-        [HttpPost]
+        // POST: CedenteLocal/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var cedenteLocal = await _context.CedenteLocal.FindAsync(id);
+            _context.CedenteLocal.Remove(cedenteLocal);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CedenteLocalExists(int id)
+        {
+            return _context.CedenteLocal.Any(e => e.id == id);
         }
     }
 }

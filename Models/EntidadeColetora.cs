@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace iSangue.Models
 {
-    public class Entidadecoletora : Usuario
+    public class EntidadeColetora : Usuario
     {
+        public int idEntidade { get; set; }
         public string nome { get; set; }
         public string enderecoComercial { get; set; } // não sei se será utilizado
         public int telefone { get; set; }

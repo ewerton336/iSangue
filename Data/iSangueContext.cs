@@ -16,7 +16,8 @@ namespace iSangue.Data
         {
         }
 
-        public DbSet<Entidadecoletora> Entidadecoletora { get; set; }
+        public DbSet<EntidadeColetora> entidadeColetora { get; set; }
         public DbSet<Doador> Doador { get; set; }
+        public DbSet<CedenteLocal> CedenteLocal { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Isangue.Controllers
+namespace iSangue.Controllers
 {
     public class HomeController : Controller
     {

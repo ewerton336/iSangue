@@ -15,7 +15,7 @@ namespace iSangue.DAO
         public DoadorDao(MySqlConnection dbConnection) : base(dbConnection)
         {
         }
-        public IEnumerable<Doador> GetDoadores()
+        public async Task<IEnumerable<Doador>> GetDoadores()
         {
             try
             {
@@ -23,11 +23,6 @@ namespace iSangue.DAO
                                 D.ID idDoador
                                 ,D.NOME nome
                                 ,D.SOBRENOME sobrenome
-                                ,D.ENDERECO endereco
-                                ,D.NUMERO_RESIDENCIA numeroResidencia
-                                ,D.COMPLEMENTO complemento
-                                ,D.CIDADE_RESIDENCIA cidadeResidencia
-                                ,D.ESTADO_RESIDENCIA estadoResidencia
                                 ,D.DT_NASCIMENTO dataNasc
                                 ,D.TELEFONE telefone
                                 ,D.CIDADE_DOACAO cidadeDoacao
@@ -39,7 +34,7 @@ namespace iSangue.DAO
                                 FROM DOADOR D
                                 inner join usuario U 
                                 on D.USUARIO_ID  = U.ID ";
-                var result = DbConnection.Query<Doador>(SQL);
+                var result = await DbConnection.QueryAsync<Doador>(SQL);
                 return result;
             }
             catch (Exception e)
@@ -58,11 +53,6 @@ namespace iSangue.DAO
                                 D.ID idDoador
                                 ,D.NOME nome
                                 ,D.SOBRENOME sobrenome
-                                ,D.ENDERECO endereco
-                                ,D.NUMERO_RESIDENCIA numeroResidencia
-                                ,D.COMPLEMENTO complemento
-                                ,D.CIDADE_RESIDENCIA cidadeResidencia
-                                ,D.ESTADO_RESIDENCIA estadoResidencia
                                 ,D.DT_NASCIMENTO dataNasc
                                 ,D.TELEFONE telefone
                                 ,D.CIDADE_DOACAO cidadeDoacao
@@ -98,11 +88,6 @@ namespace iSangue.DAO
                 var sql = @"INSERT INTO doador
                               (NOME
                               , SOBRENOME
-                              , ENDERECO
-                              , NUMERO_RESIDENCIA
-                              , COMPLEMENTO
-                              , CIDADE_RESIDENCIA
-                              , ESTADO_RESIDENCIA
                               , DT_NASCIMENTO
                               , TELEFONE
                               , CIDADE_DOACAO
@@ -111,11 +96,6 @@ namespace iSangue.DAO
                          VALUES(
                                    @NOME
                                  , @SOBRENOME
-                                 , @ENDERECO
-                                 , @NUMERO_RESIDENCIA
-                                 , @COMPLEMENTO
-                                 , @CIDADE_RESIDENCIA
-                                 , @ESTADO_RESIDENCIA
                                  , @DT_NASCIMENTO
                                  , @TELEFONE
                                  , @CIDADE_DOACAO
@@ -126,11 +106,6 @@ namespace iSangue.DAO
                 {
                     NOME = doador.nome,
                     SOBRENOME = doador.sobrenome,
-                    ENDERECO = doador.endereco,
-                    NUMERO_RESIDENCIA = doador.numeroResidencia,
-                    COMPLEMENTO = doador.complemento,
-                    CIDADE_RESIDENCIA = doador.cidadeResidencia,
-                    ESTADO_RESIDENCIA = doador.estadoResidencia,
                     DT_NASCIMENTO = doador.dataNasc,
                     TELEFONE = doador.telefone,
                     CIDADE_DOACAO = doador.cidadeDoacao,
@@ -167,11 +142,6 @@ namespace iSangue.DAO
                 var sql = @"UPDATE doador
                         SET NOME=@NOME
                           , SOBRENOME=@SOBRENOME
-                          , ENDERECO=@ENDERECO
-                          , NUMERO_RESIDENCIA=@NUM_RESIDENCIA
-                          , COMPLEMENTO=@COMPLEMENTO
-                          , CIDADE_RESIDENCIA=@CIDADE_RESIDENCIA
-                          , ESTADO_RESIDENCIA=@ESTADO_RESIDENCIA
                           , DT_NASCIMENTO=@DTNASC
                           , TELEFONE=@TEL
                           , CIDADE_DOACAO=@CIDADEDOA
@@ -181,11 +151,6 @@ namespace iSangue.DAO
                 {
                     NOME = doador.nome,
                     SOBRENOME = doador.sobrenome,
-                    ENDERECO = doador.endereco,
-                    NUM_RESIDENCIA = doador.numeroResidencia,
-                    COMPLEMENTO = doador.complemento,
-                    CIDADE_RESIDENCIA = doador.cidadeResidencia,
-                    ESTADO_RESIDENCIA = doador.estadoResidencia,
                     DTNASC = doador.dataNasc,
                     TEL = doador.telefone,
                     CIDADEDOA = doador.cidadeDoacao,

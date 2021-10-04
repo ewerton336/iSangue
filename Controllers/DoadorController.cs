@@ -26,7 +26,7 @@ namespace iSangue.Controllers
         // GET: Doador
         public async Task<IActionResult> Index()
         {
-            return View(doadorDao.GetDoadores());
+            return View(await doadorDao.GetDoadores());
         }
 
         public async Task<IActionResult> Login()
@@ -50,7 +50,7 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("email,senha")] Doador doador)
         {
-            var login = doadorDao.LoginDoador(doador.email, doador.senha);
+            var login = usuarioDao.LoginUsuario(doador.email, doador.senha);
             if (login != null)
             {
                 return RedirectToAction(nameof(LoginSucess));
@@ -100,7 +100,7 @@ namespace iSangue.Controllers
             if (ModelState.IsValid)
             {
                 usuarioDao.InserirUsuario(doador.email, doador.senha, "DOADOR");
-                int idCriada = usuarioDao.getIdByEmail(doador.email); // NÃO CONSEGUI FAZER A FOREIGN KEY
+                int idCriada = usuarioDao.getIdByEmail(doador.email);
                 new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }

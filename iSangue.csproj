@@ -13,7 +13,6 @@
 
   <ItemGroup>
 	  <Folder Include="Views\CalendarioEvento\" />
-	  <Folder Include="Views\CedenteLocal\" />
 	  <Folder Include="Views\Administrador\" />
 	  <Folder Include="Views\Administrador\" />
 	  <Folder Include="Views\Usuario\" />

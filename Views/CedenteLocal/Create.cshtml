@@ -1,4 +1,4 @@
-﻿@model iSangue.Models.EntidadeColetora
+﻿@model iSangue.Models.CedenteLocal
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>EntidadeColetora</h4>
+<h4>CedenteLocal</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,19 +18,19 @@
                 <span asp-validation-for="nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="enderecoComercial" class="control-label"></label>
-                <input asp-for="enderecoComercial" class="form-control" />
-                <span asp-validation-for="enderecoComercial" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
                 <input asp-for="telefone" class="form-control" />
                 <span asp-validation-for="telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="nomeResponsavel" class="control-label"></label>
-                <input asp-for="nomeResponsavel" class="form-control" />
-                <span asp-validation-for="nomeResponsavel" class="text-danger"></span>
+                <label asp-for="endereco" class="control-label"></label>
+                <input asp-for="endereco" class="form-control" />
+                <span asp-validation-for="endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="responsavel" class="control-label"></label>
+                <input asp-for="responsavel" class="form-control" />
+                <span asp-validation-for="responsavel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="email" class="control-label"></label>
@@ -41,7 +41,12 @@
                 <label asp-for="senha" class="control-label"></label>
                 <input asp-for="senha" class="form-control" />
                 <span asp-validation-for="senha" class="text-danger"></span>
-            </div>   
+            </div>
+            <div class="form-group">
+                <label asp-for="tipoUsuario" class="control-label"></label>
+                <input asp-for="tipoUsuario" class="form-control" />
+                <span asp-validation-for="tipoUsuario" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -18,13 +18,12 @@ namespace iSangue.DAO
             var sql = @"INSERT INTO USUARIO(
                             EMAIL 
                             ,SENHA
-                            ,TIPO_USUARIO
-                               )
+                            ,TIPO_USUARIO)
                             VALUES(
                             @EMAIL 
                             ,@SENHA
                             ,@TIPO_USUARIO)";
-            var execute = DbConnection.Execute(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
+            var execute =  DbConnection.Execute(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
             return execute;
         }
 
@@ -41,6 +40,16 @@ namespace iSangue.DAO
         {
             string sql = "DELETE FROM USUARIO WHERE ID = @ID";
             DbConnection.Execute(sql, new { ID = id });
+        }
+
+        public string LoginUsuario(string email, string senha)
+        {
+            var sql = @"SELECT EMAIL
+                        FROM USUARIO
+                        WHERE EMAIL = @EMAIL
+                        AND SENHA = @SENHA";
+            var execute = DbConnection.QueryFirstOrDefault<string>(sql, new { EMAIL = email, SENHA = senha });
+            return execute;
         }
 
 

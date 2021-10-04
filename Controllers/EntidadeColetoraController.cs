@@ -7,88 +7,86 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
+using iSangue.DAO;
+
 
 namespace iSangue.Controllers
 {
-    public class EntidadecoletoraController : Controller
+    public class EntidadeColetoraController : Controller
     {
         private readonly iSangueContext _context;
+        private readonly EntidadeColetoraDao entidadeColetoraDao;
+        private readonly UsuarioDao usuarioDao;
 
-        public EntidadecoletoraController(iSangueContext context)
+        public EntidadeColetoraController(iSangueContext context)
         {
             _context = context;
+            entidadeColetoraDao = new EntidadeColetoraDao(Helper.DBConnectionSql);
+            usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
         }
 
-        // GET: Entidadecoletora
+        // GET: EntidadeColetora
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entidadecoletora.ToListAsync());
+            return View(await entidadeColetoraDao.GetEntidades());
         }
 
-        // GET: Entidadecoletora/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: EntidadeColetora/Details/5
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            var entidadeColetora = entidadeColetoraDao.GetEntidadeById(id);
+            if (entidadeColetora == null)
             {
                 return NotFound();
             }
 
-            var entidadecoletora = await _context.Entidadecoletora
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (entidadecoletora == null)
-            {
-                return NotFound();
-            }
-
-            return View(entidadecoletora);
+            return View(entidadeColetora);
         }
 
-        // GET: Entidadecoletora/Create
+        // GET: EntidadeColetora/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Entidadecoletora/Create
+        // POST: EntidadeColetora/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("nome,enderecoComercial,telefone,nomeResponsavel,id,email,senha")] Entidadecoletora entidadecoletora)
+        public async Task<IActionResult> Create([Bind("idEntidade,nome,enderecoComercial,telefone,nomeResponsavel,id,email,senha,tipoUsuario")] EntidadeColetora entidadeColetora)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(entidadecoletora);
-                await _context.SaveChangesAsync();
+                usuarioDao.InserirUsuario(entidadeColetora.email, entidadeColetora.senha, "ENTIDADE_COLETORA");
+                int idCriada = usuarioDao.getIdByEmail(entidadeColetora.email);
+                entidadeColetoraDao.InserirEntidade(entidadeColetora, idCriada);
                 return RedirectToAction(nameof(Index));
             }
-            return View(entidadecoletora);
+            return View(entidadeColetora);
         }
 
-        // GET: Entidadecoletora/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: EntidadeColetora/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var entidadecoletora = await _context.Entidadecoletora.FindAsync(id);
-            if (entidadecoletora == null)
+            var entidadeColetora = entidadeColetoraDao.GetEntidadeById(id);
+            if (entidadeColetora == null)
             {
                 return NotFound();
             }
-            return View(entidadecoletora);
+            return View(entidadeColetora);
         }
 
-        // POST: Entidadecoletora/Edit/5
+        // POST: EntidadeColetora/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("nome,enderecoComercial,telefone,nomeResponsavel,id,email,senha")] Entidadecoletora entidadecoletora)
+        public async Task<IActionResult> Edit(int id, [Bind("idEntidade,nome,enderecoComercial,telefone,nomeResponsavel,id,email,senha,tipoUsuario")] EntidadeColetora entidadeColetora)
         {
-            if (id != entidadecoletora.id)
+
+            if (id != entidadeColetora.id)
             {
                 return NotFound();
             }
@@ -97,12 +95,11 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    _context.Update(entidadecoletora);
-                    await _context.SaveChangesAsync();
+                    entidadeColetoraDao.AtualizarEntidade(entidadeColetora);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EntidadecoletoraExists(entidadecoletora.id))
+                    if (!EntidadeColetoraExists(entidadeColetora.id))
                     {
                         return NotFound();
                     }
@@ -113,41 +110,34 @@ namespace iSangue.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(entidadecoletora);
+            return View(entidadeColetora);
         }
 
-        // GET: Entidadecoletora/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: EntidadeColetora/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            var entidade = entidadeColetoraDao.GetEntidadeById(id);
+            if (entidade == null)
             {
                 return NotFound();
             }
 
-            var entidadecoletora = await _context.Entidadecoletora
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (entidadecoletora == null)
-            {
-                return NotFound();
-            }
-
-            return View(entidadecoletora);
+            return View(entidade);
         }
 
-        // POST: Entidadecoletora/Delete/5
+        // POST: EntidadeColetora/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entidadecoletora = await _context.Entidadecoletora.FindAsync(id);
-            _context.Entidadecoletora.Remove(entidadecoletora);
-            await _context.SaveChangesAsync();
+            var entidade = entidadeColetoraDao.GetEntidadeById(id);
+            usuarioDao.Delete(entidade.id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EntidadecoletoraExists(int id)
+        private bool EntidadeColetoraExists(int id)
         {
-            return _context.Entidadecoletora.Any(e => e.id == id);
+            return _context.entidadeColetora.Any(e => e.id == id);
         }
     }
 }
