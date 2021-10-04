@@ -8,7 +8,7 @@ namespace iSangue.Models
 {
     public class Doador : Usuario
     {
-        public int id { get; set; }
+        public int idDoador { get; set; }
         public string nome { get; set; }
         public string sobrenome { get; set; }
         public string endereco { get; set; }
@@ -20,6 +20,5 @@ namespace iSangue.Models
         public int telefone { get; set; }
         public string cidadeDoacao { get; set; }
         public string tipoSanguineo { get; set; }
-        public int usuarioId { get; set; }
     }
 }

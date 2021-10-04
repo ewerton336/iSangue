@@ -20,19 +20,25 @@ namespace iSangue.DAO
             try
             {
                 string SQL = @"SELECT
-                                ID
-                                ,NOME nome
-                                ,SOBRENOME sobrenome
-                                ,ENDERECO endereco
-                                ,NUMERO_RESIDENCIA numeroResidencia
-                                ,COMPLEMENTO complemento
-                                ,CIDADE_RESIDENCIA cidadeResidencia
-                                ,ESTADO_RESIDENCIA estadoResidencia
-                                ,DT_NASCIMENTO dataNasc
-                                ,TELEFONE telefone
-                                ,CIDADE_DOACAO cidadeDoacao
-                                ,TIPO_SANGUINEO tipoSanguineo
-                                FROM DOADOR";
+                                D.ID idDoador
+                                ,D.NOME nome
+                                ,D.SOBRENOME sobrenome
+                                ,D.ENDERECO endereco
+                                ,D.NUMERO_RESIDENCIA numeroResidencia
+                                ,D.COMPLEMENTO complemento
+                                ,D.CIDADE_RESIDENCIA cidadeResidencia
+                                ,D.ESTADO_RESIDENCIA estadoResidencia
+                                ,D.DT_NASCIMENTO dataNasc
+                                ,D.TELEFONE telefone
+                                ,D.CIDADE_DOACAO cidadeDoacao
+                                ,D.TIPO_SANGUINEO tipoSanguineo
+                                ,U.ID 
+                                ,U.EMAIL 
+                               -- ,U.SENHA
+                                ,U.TIPO_USUARIO tipoUsuario
+                                FROM DOADOR D
+                                inner join usuario U 
+                                on D.USUARIO_ID  = U.ID ";
                 var result = DbConnection.Query<Doador>(SQL);
                 return result;
             }
@@ -48,20 +54,27 @@ namespace iSangue.DAO
         {
             try
             {
-                string SQL = @"SELECT
-                                 ID
-                                ,NOME nome
-                                ,SOBRENOME sobrenome
-                                ,ENDERECO endereco
-                                ,NUMERO_RESIDENCIA numeroResidencia
-                                ,COMPLEMENTO complemento
-                                ,CIDADE_RESIDENCIA cidadeResidencia
-                                ,ESTADO_RESIDENCIA estadoResidencia
-                                ,DT_NASCIMENTO dataNasc
-                                ,TELEFONE telefone
-                                ,CIDADE_DOACAO cidadeDoacao
-                                ,TIPO_SANGUINEO tipoSanguineo
-                                FROM DOADOR WHERE ID = @ID";
+                string SQL = @"  SELECT
+                                D.ID idDoador
+                                ,D.NOME nome
+                                ,D.SOBRENOME sobrenome
+                                ,D.ENDERECO endereco
+                                ,D.NUMERO_RESIDENCIA numeroResidencia
+                                ,D.COMPLEMENTO complemento
+                                ,D.CIDADE_RESIDENCIA cidadeResidencia
+                                ,D.ESTADO_RESIDENCIA estadoResidencia
+                                ,D.DT_NASCIMENTO dataNasc
+                                ,D.TELEFONE telefone
+                                ,D.CIDADE_DOACAO cidadeDoacao
+                                ,D.TIPO_SANGUINEO tipoSanguineo
+                                ,U.ID
+                                ,U.EMAIL 
+                               -- ,U.SENHA
+                                ,U.TIPO_USUARIO 
+                                FROM DOADOR D 
+                                inner join usuario U 
+                                on D.USUARIO_ID  = U.ID 
+                                where D.ID = @ID";
                 var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
                 return result;
             }
@@ -93,7 +106,8 @@ namespace iSangue.DAO
                               , DT_NASCIMENTO
                               , TELEFONE
                               , CIDADE_DOACAO
-                              , TIPO_SANGUINEO)
+                              , TIPO_SANGUINEO
+                              , USUARIO_ID)
                          VALUES(
                                    @NOME
                                  , @SOBRENOME
@@ -105,7 +119,8 @@ namespace iSangue.DAO
                                  , @DT_NASCIMENTO
                                  , @TELEFONE
                                  , @CIDADE_DOACAO
-                                 , @TIPO_SANGUINEO)";
+                                 , @TIPO_SANGUINEO
+                                 , @USUARIO_ID)";
 
                 var execute = DbConnection.Execute(sql, new
                 {
@@ -120,9 +135,7 @@ namespace iSangue.DAO
                     TELEFONE = doador.telefone,
                     CIDADE_DOACAO = doador.cidadeDoacao,
                     TIPO_SANGUINEO = doador.tipoSanguineo,
-
-
-
+                    USUARIO_ID = idUsuario
                 }); ;
 
 
@@ -149,7 +162,9 @@ namespace iSangue.DAO
         public void AtualizarDoador(Doador doador)
 
         {
-            var sql = @"UPDATE doador
+            try
+            {
+                var sql = @"UPDATE doador
                         SET NOME=@NOME
                           , SOBRENOME=@SOBRENOME
                           , ENDERECO=@ENDERECO
@@ -162,21 +177,28 @@ namespace iSangue.DAO
                           , CIDADE_DOACAO=@CIDADEDOA
                           , TIPO_SANGUINEO=@TIPSANGUE
                             WHERE ID=@ID;";
-            var execute = DbConnection.Execute(sql, new
+                var execute = DbConnection.Execute(sql, new
+                {
+                    NOME = doador.nome,
+                    SOBRENOME = doador.sobrenome,
+                    ENDERECO = doador.endereco,
+                    NUM_RESIDENCIA = doador.numeroResidencia,
+                    COMPLEMENTO = doador.complemento,
+                    CIDADE_RESIDENCIA = doador.cidadeResidencia,
+                    ESTADO_RESIDENCIA = doador.estadoResidencia,
+                    DTNASC = doador.dataNasc,
+                    TEL = doador.telefone,
+                    CIDADEDOA = doador.cidadeDoacao,
+                    TIPSANGUE = doador.tipoSanguineo,
+                    ID = doador.id
+                });
+
+            }
+            catch (Exception)
             {
-                NOME = doador.nome,
-                SOBRENOME =doador.sobrenome,
-                ENDERECO = doador.endereco,
-                NUM_RESIDENCIA = doador.numeroResidencia,
-                COMPLEMENTO = doador.complemento,
-                CIDADE_RESIDENCIA = doador.cidadeResidencia,
-                ESTADO_RESIDENCIA = doador.estadoResidencia,
-                DTNASC = doador.dataNasc,
-                TEL = doador.telefone,
-                CIDADEDOA = doador.cidadeDoacao,
-                TIPSANGUE = doador.tipoSanguineo,
-                ID = doador.id
-            });
+
+                throw;
+            }
         }
 
 

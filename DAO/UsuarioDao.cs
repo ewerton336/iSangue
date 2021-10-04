@@ -37,6 +37,12 @@ namespace iSangue.DAO
         }
 
 
+        public void Delete(int id)
+        {
+            string sql = "DELETE FROM USUARIO WHERE ID = @ID";
+            DbConnection.Execute(sql, new { ID = id });
+        }
+
 
     }
 }

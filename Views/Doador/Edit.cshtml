@@ -49,12 +49,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="dataNasc" class="control-label"></label>
-                <input asp-for="dataNasc" class="form-control" />
+                <input type="date" class="form-control" required asp-for="dataNasc" />
                 <span asp-validation-for="dataNasc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
-                <input asp-for="telefone" class="form-control" />
+                <input asp-for="telefone" type="tel" class="form-control" required />
                 <span asp-validation-for="telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -64,13 +64,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="tipoSanguineo" class="control-label"></label>
-                <input asp-for="tipoSanguineo" class="form-control" />
+                <select class="form-control" asp-for="tipoSanguineo">
+                    <option value="Não sei">Não Sei</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
                 <span asp-validation-for="tipoSanguineo" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
                 <label asp-for="email" class="control-label"></label>
-                <input asp-for="email" class="form-control" />
+                <input asp-for="email" class="form-control" placeholder="Readonly" />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -55,19 +55,19 @@ namespace iSangue.Controllers
             {
                 return RedirectToAction(nameof(LoginSucess));
             }
-            else 
+            else
             {
                 return RedirectToAction(nameof(LoginError));
             }
-            
+
         }
 
 
 
 
 
-            // GET: Doador/Details/5
-            public async Task<IActionResult> Details(int id)
+        // GET: Doador/Details/5
+        public async Task<IActionResult> Details(int id)
         {
             if (id == 0)
             {
@@ -110,11 +110,6 @@ namespace iSangue.Controllers
         // GET: Doador/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var doador = doadorDao.GetDoadorById(id);
             if (doador == null)
             {
@@ -158,15 +153,9 @@ namespace iSangue.Controllers
         }
 
         // GET: Doador/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var doador = await _context.Doador
-                .FirstOrDefaultAsync(m => m.id == id);
+            var doador = doadorDao.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -180,9 +169,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doador = await _context.Doador.FindAsync(id);
-            _context.Doador.Remove(doador);
-            await _context.SaveChangesAsync();
+            var doador = doadorDao.GetDoadorById(id);
+            usuarioDao.Delete(doador.id);
             return RedirectToAction(nameof(Index));
         }
 

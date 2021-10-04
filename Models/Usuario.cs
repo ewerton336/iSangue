@@ -12,5 +12,6 @@ namespace iSangue.Models
         public int id { get; set; }
         public string email { get; set; }
         public string senha { get; set; }
+        public string tipoUsuario { get; set; }
     }
 }
