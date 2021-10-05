@@ -19,6 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
+                <img class="img-fluid" src="~/img/isangue-logo.png" alt="Card image cap" style="width: 25px;height: 25px">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">iSangue</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Inicio">Inicio</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
@@ -68,15 +69,10 @@
                                 <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
                             </div>
                         </li>
-
-
-
-
-
-
-
-
-
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="" asp-controller="Doador" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Cadastro</a></li>
+                        <li><a asp-area="" asp-controller="Doador" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </div>

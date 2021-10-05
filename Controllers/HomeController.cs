@@ -23,11 +23,6 @@ namespace iSangue.Controllers
             return View();
         }
 
-        public IActionResult Inicio()
-        {
-            return View();
-        }
-
         public IActionResult Cadastro()
         {
             return View();
