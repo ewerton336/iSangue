@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style type="text/css">
+.parent {
+display: grid;
+grid-template-columns: repeat(10, 1fr);
+grid-template-rows: repeat(6, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 2 / 2 / 6 / 6; }
+.div2 { grid-area: 2 / 6 / 4 / 8; }
+.div3 { grid-area: 2 / 8 / 4 / 10; }
+.div4 { grid-area: 4 / 6 / 6 / 8; }
+.div5 { grid-area: 4 / 8 / 6 / 10; }
+
+ .img1{
+    width:99%; /* you can use % */
+    height: auto;
+}
+
+.img2 {
+    width:100%; /* you can use % */
+    height: auto;
+}
+</style>
+<body>
+
+<div class="parent">
+<div class="div1"><img src="undraw_stars_re_6je7.png" class='img2'>
+<h3>Evento 1</h3>
+        <p>...............</p> 
+</div>
+<div class="div2"><img src="undraw_stars_re_6je7.png" class='img1'>
+<h3>Evento 2</h3>
+        <p>...............</p> 
+</div>
+<div class="div3"><img src="undraw_stars_re_6je7.png" class='img1'>
+<h3>Evento 3</h3>
+        <p>...............</p> 
+</div>
+<div class="div4"><img src="undraw_stars_re_6je7.png" class='img1'>
+<h3>Evento 4</h3>
+        <p>...............</p> 
+</div>
+<div class="div5"><img src="undraw_stars_re_6je7.png" class='img1'>
+<h3>Evento 5</h3>
+        <p>...............</p> 
+</div>
+</div>
+  
+
+  
+
+</body>
+</html>
+
