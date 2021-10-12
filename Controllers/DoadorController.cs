@@ -14,14 +14,34 @@ namespace iSangue.Controllers
     public class DoadorController : Controller
     {
         private readonly iSangueContext _context;
-        private readonly DoadorDao doadorDao;
+        private DoadorDao doadorDao;
         private readonly UsuarioDao usuarioDao;
+        private readonly DoadorDao doadorDaoInstancia;
         public DoadorController(iSangueContext context)
         {
             _context = context;
-            doadorDao = new DoadorDao(Helper.DBConnectionSql);
+  
             usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
         }
+        DoadorDao Doador
+        {
+            get
+            {
+                if (doadorDao == null)
+                {
+                    doadorDao = new DoadorDao(Helper.DBConnectionSql);
+                }
+                return doadorDao;
+            }
+            set
+            {
+                doadorDao = value;
+            }
+        }
+
+
+
+
 
         // GET: Doador
         public async Task<IActionResult> Index()
@@ -101,7 +121,7 @@ namespace iSangue.Controllers
             {
                 usuarioDao.InserirUsuario(doador.email, doador.senha, "DOADOR");
                 int idCriada = usuarioDao.getIdByEmail(doador.email);
-                new DAO.DoadorDao(Helper.DBConnectionSql).InserirDoador(doador, idCriada);
+                Doador.InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(doador);

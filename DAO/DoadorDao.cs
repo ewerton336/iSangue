@@ -65,8 +65,9 @@ namespace iSangue.DAO
                                 inner join usuario U 
                                 on D.USUARIO_ID  = U.ID 
                                 where D.ID = @ID";
-                var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
-                return result;
+
+                using var result = new MySqlConnection();
+                return result.QueryFirst<Doador>(SQL, new { ID = id });
             }
             catch (Exception e)
             {
