@@ -62,34 +62,9 @@ namespace iSangue.Controllers
             return View(await Doador.GetDoadores());
         }
 
+        
 
-        public async Task<IActionResult> LoginError()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> LoginSucess()
-        {
-            return View();
-        }
-
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Bind("email,senha")] Doador doador)
-        {
-            var login = Usuario.LoginUsuario(doador.email, doador.senha);
-            if (login != null)
-            {
-                return RedirectToAction(nameof(LoginSucess));
-            }
-            else
-            {
-                return RedirectToAction(nameof(LoginError));
-            }
-
-        }
+       
 
 
 

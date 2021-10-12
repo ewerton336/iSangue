@@ -15,7 +15,6 @@
 	  <Folder Include="Views\CalendarioEvento\" />
 	  <Folder Include="Views\Administrador\" />
 	  <Folder Include="Views\Administrador\" />
-	  <Folder Include="Views\Usuario\" />
   </ItemGroup>
 
   <ItemGroup>

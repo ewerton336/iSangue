@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iSangue.DAO;
+using iSangue.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,23 @@ namespace iSangue.Controllers
 {
     public class UsuarioController : Controller
     {
+        private UsuarioDao usuarioDao;
+
+        UsuarioDao Usuario
+        {
+            get
+            {
+                if (usuarioDao == null)
+                {
+                    usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
+                }
+                return usuarioDao;
+            }
+            set
+            {
+                usuarioDao = value;
+            }
+        }
         // GET: UsuarioController
         public ActionResult Index()
         {
@@ -83,5 +102,46 @@ namespace iSangue.Controllers
                 return View();
             }
         }
+
+
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("email,senha")] Usuario usuario)
+        {
+            var login = Usuario.LoginUsuario(usuario.email, usuario.senha);
+            if (login != null)
+            {
+                return RedirectToAction(nameof(LoginSucess));
+            }
+            else
+            {
+                return RedirectToAction(nameof(LoginError));
+            }
+
+        }
+
+
+
+        public async Task<IActionResult> LoginError()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> LoginSucess()
+        {
+            return View();
+        }
+
+
+
+
+       
+
+
     }
 }
