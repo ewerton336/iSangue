@@ -12,11 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="idEntidade" class="control-label"></label>
-                <input asp-for="idEntidade" class="form-control" />
-                <span asp-validation-for="idEntidade" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="nome" class="control-label"></label>
                 <input asp-for="nome" class="form-control" />
@@ -48,11 +44,7 @@
                 <input asp-for="senha" class="form-control" />
                 <span asp-validation-for="senha" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="tipoUsuario" class="control-label"></label>
-                <input asp-for="tipoUsuario" class="form-control" />
-                <span asp-validation-for="tipoUsuario" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

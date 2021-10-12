@@ -32,6 +32,7 @@ namespace iSangue.DAO
                                inner join usuario U 
                                on E.USUARIO_ID  = U.ID"; 
                 var result = await DbConnection.QueryAsync<EntidadeColetora>(SQL);
+                DbConnection.Close();
                 return result;
             }
             catch (Exception e)
@@ -60,6 +61,7 @@ namespace iSangue.DAO
                                on E.USUARIO_ID  = U.ID
                                 where E.ID = @ID";
                 var result = DbConnection.QueryFirst<EntidadeColetora>(SQL, new { ID = id });
+                DbConnection.Close();
                 return result;
             }
             catch (Exception e)
@@ -97,7 +99,7 @@ namespace iSangue.DAO
                     NOME_RESPONSAVEL = entidadecoletora.nomeResponsavel,
                     USUARIO_ID = idUsuario
                 });; ;
-
+                DbConnection.Close();
 
 
             }
@@ -115,6 +117,7 @@ namespace iSangue.DAO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";
             var execute = DbConnection.QueryFirstOrDefault<EntidadeColetora>(sql, new { EMAIL = email, SENHA = senha });
+            DbConnection.Close();
             return execute;
         }
 
@@ -138,7 +141,7 @@ namespace iSangue.DAO
                     NOME_RESPONSAVEL = entidadeColetora.nomeResponsavel,
                     ID = entidadeColetora.id
                 });
-
+                DbConnection.Close();
             }
             catch (Exception)
             {

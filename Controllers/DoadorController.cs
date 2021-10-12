@@ -15,13 +15,10 @@ namespace iSangue.Controllers
     {
         private readonly iSangueContext _context;
         private DoadorDao doadorDao;
-        private readonly UsuarioDao usuarioDao;
-        private readonly DoadorDao doadorDaoInstancia;
+        private UsuarioDao usuarioDao;
         public DoadorController(iSangueContext context)
         {
             _context = context;
-  
-            usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
         }
         DoadorDao Doador
         {
@@ -39,6 +36,22 @@ namespace iSangue.Controllers
             }
         }
 
+        UsuarioDao Usuario
+        {
+            get
+            {
+                if (usuarioDao == null)
+                {
+                    usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
+                }
+                return usuarioDao;
+            }
+            set
+            {
+                usuarioDao = value;
+            }
+        }
+
 
 
 
@@ -46,13 +59,9 @@ namespace iSangue.Controllers
         // GET: Doador
         public async Task<IActionResult> Index()
         {
-            return View(await doadorDao.GetDoadores());
+            return View(await Doador.GetDoadores());
         }
 
-        public async Task<IActionResult> Login()
-        {
-            return View();
-        }
 
         public async Task<IActionResult> LoginError()
         {
@@ -70,7 +79,7 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("email,senha")] Doador doador)
         {
-            var login = usuarioDao.LoginUsuario(doador.email, doador.senha);
+            var login = Usuario.LoginUsuario(doador.email, doador.senha);
             if (login != null)
             {
                 return RedirectToAction(nameof(LoginSucess));
@@ -94,7 +103,7 @@ namespace iSangue.Controllers
                 return NotFound();
             }
 
-            var doador = doadorDao.GetDoadorById(id);
+            var doador = Doador.GetDoadorById(id);
 
             if (doador == null)
             {
@@ -119,8 +128,8 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuarioDao.InserirUsuario(doador.email, doador.senha, "DOADOR");
-                int idCriada = usuarioDao.getIdByEmail(doador.email);
+                Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
+                int idCriada = Usuario.getIdByEmail(doador.email);
                 Doador.InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }
@@ -130,7 +139,7 @@ namespace iSangue.Controllers
         // GET: Doador/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var doador = doadorDao.GetDoadorById(id);
+            var doador = Doador.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -154,7 +163,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    doadorDao.AtualizarDoador(doador);
+                    Doador.AtualizarDoador(doador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -175,7 +184,7 @@ namespace iSangue.Controllers
         // GET: Doador/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var doador = doadorDao.GetDoadorById(id);
+            var doador = Doador.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -189,8 +198,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doador = doadorDao.GetDoadorById(id);
-            usuarioDao.Delete(doador.id);
+            var doador = Doador.GetDoadorById(id);
+            Usuario.Delete(doador.id);
             return RedirectToAction(nameof(Index));
         }
 

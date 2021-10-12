@@ -7,40 +7,76 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
+using iSangue.DAO;
 
 namespace iSangue.Controllers
 {
     public class CedenteLocalController : Controller
     {
         private readonly iSangueContext _context;
+        private CedenteLocalDao cedenteLocalDao;
+        private UsuarioDao usuarioDao;
 
         public CedenteLocalController(iSangueContext context)
         {
             _context = context;
+
         }
+        CedenteLocalDao Cedente
+        {
+            get
+            {
+                if (cedenteLocalDao == null)
+                {
+                    cedenteLocalDao = new CedenteLocalDao(Helper.DBConnectionSql);
+                }
+                return cedenteLocalDao;
+            }
+            set
+            {
+                cedenteLocalDao = value;
+            }
+        }
+
+        UsuarioDao Usuario
+        {
+            get
+            {
+                if (usuarioDao == null)
+                {
+                    usuarioDao = new UsuarioDao(Helper.DBConnectionSql);
+                }
+                return usuarioDao;
+            }
+            set
+            {
+                usuarioDao = value;
+            }
+        }
+
 
         // GET: CedenteLocal
         public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await Cedente.GetCedenteLocals());
         }
 
         // GET: CedenteLocal/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var cedenteLocal = await _context.CedenteLocal
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (cedenteLocal == null)
+            var cedente = Cedente.GetCedenteById(id);
+
+            if (cedente == null)
             {
                 return NotFound();
             }
 
-            return View(cedenteLocal);
+            return View(cedente);
         }
 
         // GET: CedenteLocal/Create
@@ -58,28 +94,25 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cedenteLocal);
-                await _context.SaveChangesAsync();
+                Usuario.InserirUsuario(cedenteLocal.email, cedenteLocal.senha, "CEDENTE_LOCAL");
+                int idCriada = Usuario.getIdByEmail(cedenteLocal.email);
+                Cedente.InserirCedente(cedenteLocal, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(cedenteLocal);
         }
 
         // GET: CedenteLocal/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var cedente = Cedente.GetCedenteById(id);
+            if (cedente == null)
             {
                 return NotFound();
             }
-
-            var cedenteLocal = await _context.CedenteLocal.FindAsync(id);
-            if (cedenteLocal == null)
-            {
-                return NotFound();
-            }
-            return View(cedenteLocal);
+            return View(cedente);
         }
+
 
         // POST: CedenteLocal/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -97,8 +130,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    _context.Update(cedenteLocal);
-                    await _context.SaveChangesAsync();
+                    Cedente.AtualizarCedente(cedenteLocal);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,21 +149,15 @@ namespace iSangue.Controllers
         }
 
         // GET: CedenteLocal/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            var cedente = Cedente.GetCedenteById(id);
+            if (cedente == null)
             {
                 return NotFound();
             }
 
-            var cedenteLocal = await _context.CedenteLocal
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (cedenteLocal == null)
-            {
-                return NotFound();
-            }
-
-            return View(cedenteLocal);
+            return View(cedente);
         }
 
         // POST: CedenteLocal/Delete/5
@@ -139,9 +165,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cedenteLocal = await _context.CedenteLocal.FindAsync(id);
-            _context.CedenteLocal.Remove(cedenteLocal);
-            await _context.SaveChangesAsync();
+            var cedente = Cedente.GetCedenteById(id);
+            Usuario.Delete(cedente.id);
             return RedirectToAction(nameof(Index));
         }
 

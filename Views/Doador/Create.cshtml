@@ -29,12 +29,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
-                <input asp-for="telefone" type="tel" class="form-control" required />
+                <input asp-for="telefone" type="tel" class="form-control" pattern="[0-9]{11}" />
                 <span asp-validation-for="telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="cidadeDoacao" class="control-label"></label>
-                <input asp-for="cidadeDoacao" class="form-control" required />
+                <select class="form-control" asp-for="cidadeDoacao">
+                    <option value="Não sei">Não Sei</option>
+                    <option value="São Vicente">São Vicente</option>
+                    <option value="Praia Grande">Praia Grande</option>
+                    <option value="Mongagua">Mongagua</option>
+                    <option value="Itanahem">Itanhaem</option>
+                    <option value="Peruibe">Peruibe</option>
+                    <option value="Itariri">Itariri</option>
+                    <option value="Pedro de Toledo">Pedro de Toledo</option>
+                    <option value="Iguape">Iguape</option>
+                </select>
                 <span asp-validation-for="cidadeDoacao" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -60,7 +70,7 @@
 
             <div class="form-group">
                 <label asp-for="email" class="control-label"></label>
-                <input asp-for="email" class="form-control" req />
+                <input asp-for="email" type="email" class="form-control" req />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">

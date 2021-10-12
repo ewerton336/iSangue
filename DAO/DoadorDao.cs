@@ -17,6 +17,8 @@ namespace iSangue.DAO
         }
         public async Task<IEnumerable<Doador>> GetDoadores()
         {
+
+
             try
             {
                 string SQL = @"SELECT
@@ -35,12 +37,17 @@ namespace iSangue.DAO
                                 inner join usuario U 
                                 on D.USUARIO_ID  = U.ID ";
                 var result = await DbConnection.QueryAsync<Doador>(SQL);
+                DbConnection.Close();
                 return result;
             }
             catch (Exception e)
             {
                 throw e;
             }
+
+
+
+
 
         }
 
@@ -66,8 +73,10 @@ namespace iSangue.DAO
                                 on D.USUARIO_ID  = U.ID 
                                 where D.ID = @ID";
 
-                using var result = new MySqlConnection();
-                return result.QueryFirst<Doador>(SQL, new { ID = id });
+                var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
+                DbConnection.Close();
+                return result;
+                
             }
             catch (Exception e)
             {
@@ -113,9 +122,7 @@ namespace iSangue.DAO
                     TIPO_SANGUINEO = doador.tipoSanguineo,
                     USUARIO_ID = idUsuario
                 }); ;
-
-
-
+                DbConnection.Close();
             }
             catch (Exception ex)
             {
@@ -125,13 +132,22 @@ namespace iSangue.DAO
 
         public Doador LoginDoador(string email, string senha)
         {
-            var sql = @"SELECT EMAIL
+            try
+            {
+                var sql = @"SELECT EMAIL
                         ,SENHA
                         FROM USUARIO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";
-            var execute = DbConnection.QueryFirstOrDefault<Doador>(sql, new { EMAIL = email, SENHA = senha });
-            return execute;
+                var execute = DbConnection.QueryFirstOrDefault<Doador>(sql, new { EMAIL = email, SENHA = senha });
+                DbConnection.Close();
+                return execute;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
 
@@ -158,12 +174,12 @@ namespace iSangue.DAO
                     TIPSANGUE = doador.tipoSanguineo,
                     ID = doador.id
                 });
-
+                DbConnection.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
