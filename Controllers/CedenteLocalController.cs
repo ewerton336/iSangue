@@ -69,7 +69,7 @@ namespace iSangue.Controllers
                 return NotFound();
             }
 
-            var cedente = Cedente.GetCedenteById(id);
+            var cedente = await Cedente .GetCedenteById(id);
 
             if (cedente == null)
             {
@@ -94,9 +94,9 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                Usuario.InserirUsuario(cedenteLocal.email, cedenteLocal.senha, "CEDENTE_LOCAL");
-                int idCriada = Usuario.getIdByEmail(cedenteLocal.email);
-                Cedente.InserirCedente(cedenteLocal, idCriada);
+                await Usuario .InserirUsuario(cedenteLocal.email, cedenteLocal.senha, "CEDENTE_LOCAL");
+                int idCriada = await Usuario.getIdByEmail(cedenteLocal.email);
+                await Cedente.InserirCedente(cedenteLocal, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(cedenteLocal);
@@ -105,7 +105,7 @@ namespace iSangue.Controllers
         // GET: CedenteLocal/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var cedente = Cedente.GetCedenteById(id);
+            var cedente = await Cedente .GetCedenteById(id);
             if (cedente == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    Cedente.AtualizarCedente(cedenteLocal);
+                    await Cedente .AtualizarCedente(cedenteLocal);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,7 +151,7 @@ namespace iSangue.Controllers
         // GET: CedenteLocal/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var cedente = Cedente.GetCedenteById(id);
+            var cedente = await Cedente.GetCedenteById(id);
             if (cedente == null)
             {
                 return NotFound();
@@ -165,8 +165,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cedente = Cedente.GetCedenteById(id);
-            Usuario.Delete(cedente.id);
+            var cedente = await Cedente.GetCedenteById(id);
+            await Usuario.Delete(cedente.id);
             return RedirectToAction(nameof(Index));
         }
 

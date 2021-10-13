@@ -52,23 +52,11 @@ namespace iSangue.Controllers
             }
         }
 
-
-
-
-
         // GET: Doador
         public async Task<IActionResult> Index()
         {
             return View(await Doador.GetDoadores());
         }
-
-        
-
-       
-
-
-
-
 
         // GET: Doador/Details/5
         public async Task<IActionResult> Details(int id)
@@ -78,7 +66,7 @@ namespace iSangue.Controllers
                 return NotFound();
             }
 
-            var doador = Doador.GetDoadorById(id);
+            var doador = await Doador.GetDoadorById(id);
 
             if (doador == null)
             {
@@ -103,9 +91,9 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
-                int idCriada = Usuario.getIdByEmail(doador.email);
-                Doador.InserirDoador(doador, idCriada);
+                 await Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
+                int idCriada = await Usuario.getIdByEmail(doador.email);
+                await Doador.InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(doador);
@@ -114,7 +102,7 @@ namespace iSangue.Controllers
         // GET: Doador/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var doador = Doador.GetDoadorById(id);
+            var doador = await Doador.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -138,7 +126,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    Doador.AtualizarDoador(doador);
+                    await Doador.AtualizarDoador(doador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -159,7 +147,7 @@ namespace iSangue.Controllers
         // GET: Doador/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var doador = Doador.GetDoadorById(id);
+            var doador = await Doador.GetDoadorById(id);
             if (doador == null)
             {
                 return NotFound();
@@ -174,7 +162,7 @@ namespace iSangue.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var doador = Doador.GetDoadorById(id);
-            Usuario.Delete(doador.id);
+            await Usuario.Delete(doador.Id);
             return RedirectToAction(nameof(Index));
         }
 

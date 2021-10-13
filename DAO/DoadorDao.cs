@@ -52,7 +52,7 @@ namespace iSangue.DAO
         }
 
 
-        public Doador GetDoadorById(int id)
+        public async Task<Doador> GetDoadorById(int id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace iSangue.DAO
                                 on D.USUARIO_ID  = U.ID 
                                 where D.ID = @ID";
 
-                var result = DbConnection.QueryFirst<Doador>(SQL, new { ID = id });
+                var result = await DbConnection.QueryFirstOrDefaultAsync<Doador>(SQL, new { ID = id });
                 DbConnection.Close();
                 return result;
                 
@@ -88,7 +88,7 @@ namespace iSangue.DAO
 
 
 
-        public void InserirDoador(Doador doador, int idUsuario)
+        public async Task InserirDoador(Doador doador, int idUsuario)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace iSangue.DAO
                                  , @TIPO_SANGUINEO
                                  , @USUARIO_ID)";
 
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = doador.nome,
                     SOBRENOME = doador.sobrenome,
@@ -130,7 +130,7 @@ namespace iSangue.DAO
             }
         }
 
-        public Doador LoginDoador(string email, string senha)
+        public async Task<Doador> LoginDoador(string email, string senha)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace iSangue.DAO
                         FROM USUARIO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";
-                var execute = DbConnection.QueryFirstOrDefault<Doador>(sql, new { EMAIL = email, SENHA = senha });
+                var execute = await DbConnection.QueryFirstAsync<Doador>(sql, new { EMAIL = email, SENHA = senha });
                 DbConnection.Close();
                 return execute;
             }
@@ -151,7 +151,7 @@ namespace iSangue.DAO
         }
 
 
-        public void AtualizarDoador(Doador doador)
+        public async Task AtualizarDoador(Doador doador)
 
         {
             try
@@ -164,7 +164,7 @@ namespace iSangue.DAO
                           , CIDADE_DOACAO=@CIDADEDOA
                           , TIPO_SANGUINEO=@TIPSANGUE
                             WHERE ID=@ID;";
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = doador.nome,
                     SOBRENOME = doador.sobrenome,

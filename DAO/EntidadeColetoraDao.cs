@@ -43,7 +43,7 @@ namespace iSangue.DAO
         }
 
 
-        public EntidadeColetora GetEntidadeById(int id)
+        public async Task<EntidadeColetora> GetEntidadeById(int id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace iSangue.DAO
                                inner join usuario U 
                                on E.USUARIO_ID  = U.ID
                                 where E.ID = @ID";
-                var result = DbConnection.QueryFirst<EntidadeColetora>(SQL, new { ID = id });
+                var result = await DbConnection.QueryFirstAsync<EntidadeColetora>(SQL, new { ID = id });
                 DbConnection.Close();
                 return result;
             }
@@ -74,7 +74,7 @@ namespace iSangue.DAO
 
 
 
-        public void InserirEntidade(EntidadeColetora entidadecoletora, int idUsuario)
+        public async Task InserirEntidade(EntidadeColetora entidadecoletora, int idUsuario)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace iSangue.DAO
                                  , @NOME_RESPONSAVEL
                                  , @USUARIO_ID)";
 
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = entidadecoletora.nome,
                     ENDERECO_COMERCIAL = entidadecoletora.enderecoComercial,
@@ -109,20 +109,20 @@ namespace iSangue.DAO
             }
         }
 
-        public EntidadeColetora LoginEntidade(string email, string senha)
+        public async Task<EntidadeColetora> LoginEntidade(string email, string senha)
         {
             var sql = @"SELECT EMAIL
                         ,SENHA
                         FROM USUARIO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";
-            var execute = DbConnection.QueryFirstOrDefault<EntidadeColetora>(sql, new { EMAIL = email, SENHA = senha });
+            var execute = await DbConnection.QueryFirstAsync<EntidadeColetora>(sql, new { EMAIL = email, SENHA = senha });
             DbConnection.Close();
             return execute;
         }
 
 
-        public void AtualizarEntidade(EntidadeColetora entidadeColetora)
+        public async Task AtualizarEntidade(EntidadeColetora entidadeColetora)
 
         {
             try
@@ -133,7 +133,7 @@ namespace iSangue.DAO
                           , TELEFONE=@TELEFONE
                           , NOME_RESPONSAVEL=@NOME_RESPONSAVEL
                             WHERE ID=@ID;";
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = entidadeColetora.nome,
                     ENDERECO_COMERCIAL = entidadeColetora.enderecoComercial,

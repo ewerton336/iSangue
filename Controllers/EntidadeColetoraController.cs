@@ -70,7 +70,7 @@ namespace iSangue.Controllers
         // GET: EntidadeColetora/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var entidadeColetora = Entidade.GetEntidadeById(id);
+            var entidadeColetora = await Entidade.GetEntidadeById(id);
             if (entidadeColetora == null)
             {
                 return NotFound();
@@ -94,9 +94,9 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuarioDao.InserirUsuario(entidadeColetora.email, entidadeColetora.senha, "ENTIDADE_COLETORA");
-                int idCriada = usuarioDao.getIdByEmail(entidadeColetora.email);
-                Entidade.InserirEntidade(entidadeColetora, idCriada);
+                await usuarioDao.InserirUsuario(entidadeColetora.email, entidadeColetora.senha, "ENTIDADE_COLETORA");
+                int idCriada = await usuarioDao.getIdByEmail(entidadeColetora.email);
+                await Entidade.InserirEntidade(entidadeColetora, idCriada);
                 return RedirectToAction(nameof(Index));
             }
             return View(entidadeColetora);
@@ -106,7 +106,7 @@ namespace iSangue.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-            var entidadeColetora = Entidade.GetEntidadeById(id);
+            var entidadeColetora = await Entidade .GetEntidadeById(id);
             if (entidadeColetora == null)
             {
                 return NotFound();
@@ -131,7 +131,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    Entidade.AtualizarEntidade(entidadeColetora);
+                    await Entidade .AtualizarEntidade(entidadeColetora);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,7 +152,7 @@ namespace iSangue.Controllers
         // GET: EntidadeColetora/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var entidade = Entidade.GetEntidadeById(id);
+            var entidade = await Entidade .GetEntidadeById(id);
             if (entidade == null)
             {
                 return NotFound();
@@ -166,8 +166,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entidade = Entidade.GetEntidadeById(id);
-            usuarioDao.Delete(entidade.id);
+            var entidade = await Entidade .GetEntidadeById(id);
+            await usuarioDao.Delete(entidade.id);
             return RedirectToAction(nameof(Index));
         }
 

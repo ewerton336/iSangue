@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using iSangue.Models;
 using MySqlConnector;
 
 namespace iSangue.DAO
@@ -13,7 +14,7 @@ namespace iSangue.DAO
         {
         }
 
-        public object InserirUsuario( string email, string senha, string tipoUsuario)
+        public async Task<int> InserirUsuario( string email, string senha, string tipoUsuario)
         {
             var sql = @"INSERT INTO USUARIO(
                             EMAIL 
@@ -23,32 +24,31 @@ namespace iSangue.DAO
                             @EMAIL 
                             ,@SENHA
                             ,@TIPO_USUARIO)";
-            var execute =  DbConnection.Execute(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
+            var execute = await DbConnection.ExecuteAsync(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
             return execute;
         }
 
-        public int getIdByEmail (string email)
+        public async Task<int> getIdByEmail (string email)
         {
             var sql = @"SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
-            var result = DbConnection.QueryFirstOrDefault<int>(sql, new { EMAIL = email });
-
+            var result = await DbConnection.QueryFirstOrDefaultAsync<int>(sql, new { EMAIL = email });
             return result;
         }
 
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             string sql = "DELETE FROM USUARIO WHERE ID = @ID";
-            DbConnection.Execute(sql, new { ID = id });
+           await DbConnection.ExecuteAsync(sql, new { ID = id });
         }
 
-        public string LoginUsuario(string email, string senha)
+        public async Task<Usuario> LoginUsuario(string email, string senha)
         {
             var sql = @"SELECT EMAIL
                         FROM USUARIO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";
-            var execute = DbConnection.QueryFirstOrDefault<string>(sql, new { EMAIL = email, SENHA = senha });
+            var execute = await DbConnection.QueryFirstOrDefaultAsync<Usuario>(sql, new { EMAIL = email, SENHA = senha });
             return execute;
         }
 

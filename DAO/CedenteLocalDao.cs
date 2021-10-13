@@ -51,7 +51,7 @@ namespace iSangue.DAO
         }
 
 
-        public CedenteLocal GetCedenteById(int id)
+        public async Task<CedenteLocal> GetCedenteById(int id)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace iSangue.DAO
                                 on C.USUARIO_ID  = U.ID 
                                 WHERE C.ID = @ID";
 
-                var result = DbConnection.QueryFirst<CedenteLocal>(SQL, new { ID = id });
+                var result = await DbConnection.QueryFirstAsync<CedenteLocal>(SQL, new { ID = id });
                 DbConnection.Close();
                 return result;
 
@@ -81,7 +81,7 @@ namespace iSangue.DAO
 
         }
 
-        public void InserirCedente(CedenteLocal cedente, int idUsuario)
+        public async Task InserirCedente(CedenteLocal cedente, int idUsuario)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace iSangue.DAO
                                  , @USUARIO_ID)";
                                  
 
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = cedente.nome,
                     TELEFONE = cedente.telefone,
@@ -118,7 +118,7 @@ namespace iSangue.DAO
             }
         }
 
-        public void AtualizarCedente(CedenteLocal cedente)
+        public async Task AtualizarCedente(CedenteLocal cedente)
 
         {
             try
@@ -130,7 +130,7 @@ namespace iSangue.DAO
                           , NR_TELEFONE=@TEL
                           , NM_ENDERECO=@END
                             WHERE ID=@ID;";
-                var execute = DbConnection.Execute(sql, new
+                var execute = await DbConnection.ExecuteAsync(sql, new
                 {
                     NOME = cedente.nome,
                     RESPONSAVEL = cedente.responsavel,

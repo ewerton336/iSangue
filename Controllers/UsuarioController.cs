@@ -113,7 +113,7 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("email,senha")] Usuario usuario)
         {
-            var login = Usuario.LoginUsuario(usuario.email, usuario.senha);
+            var login = await Usuario.LoginUsuario(usuario.email, usuario.senha);
             if (login != null)
             {
                 return RedirectToAction(nameof(LoginSucess));
@@ -122,7 +122,6 @@ namespace iSangue.Controllers
             {
                 return RedirectToAction(nameof(LoginError));
             }
-
         }
 
 
