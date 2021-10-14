@@ -28,6 +28,9 @@ namespace iSangue
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession();
+        
             services.AddControllersWithViews();
             services.AddDbContext<iSangueContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("iSangueContext")));
@@ -38,7 +41,9 @@ namespace iSangue
         {
             if (env.IsDevelopment())
             {
+                app.UseSession();
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {

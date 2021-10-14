@@ -12,6 +12,7 @@ namespace iSangue.Controllers
     public class UsuarioController : Controller
     {
         private UsuarioDao usuarioDao;
+        private DoadorDao doadorDao;
 
         UsuarioDao Usuario
         {
@@ -26,6 +27,22 @@ namespace iSangue.Controllers
             set
             {
                 usuarioDao = value;
+            }
+        }
+
+        DoadorDao Doador
+        {
+            get
+            {
+                if (doadorDao == null)
+                {
+                    doadorDao = new DoadorDao(Helper.DBConnectionSql);
+                }
+                return doadorDao;
+            }
+            set
+            {
+                doadorDao = value;
             }
         }
         // GET: UsuarioController
@@ -116,7 +133,8 @@ namespace iSangue.Controllers
             var login = await Usuario.LoginUsuario(usuario.email, usuario.senha);
             if (login != null)
             {
-                return RedirectToAction(nameof(LoginSucess));
+                //return RedirectToAction(nameof(LoginSucess));
+                return  await LoginSucess(login);
             }
             else
             {
@@ -131,15 +149,37 @@ namespace iSangue.Controllers
             return View();
         }
 
-        public async Task<IActionResult> LoginSucess()
+        public async Task<IActionResult> LoginSucess(Usuario usuario)
+        {
+            var chavedoador = "chave";
+            ViewBag.nome = "Indefinido";
+            switch (usuario.tipoUsuario)
+            {
+                case "DOADOR":
+
+                    var result = await Doador.GetDoadorByUserID(usuario.id);
+                    HttpContext.Session.SetString(chavedoador, "DOADOR");
+                   
+                    ViewBag.nome = HttpContext.Session.GetString(chavedoador);     
+                    return View("LoginSucess");
+            }
+
+           return View("LoginSucess");
+        }
+
+
+
+        public async Task<IActionResult> teste()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Logado()
         {
             return View();
         }
 
 
-
-
-       
 
 
     }
