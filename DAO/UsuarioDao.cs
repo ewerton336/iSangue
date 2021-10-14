@@ -45,6 +45,8 @@ namespace iSangue.DAO
         public async Task<Usuario> LoginUsuario(string email, string senha)
         {
             var sql = @"SELECT EMAIL
+                        ,ID
+                        ,TIPO_USUARIO tipoUsuario
                         FROM USUARIO
                         WHERE EMAIL = @EMAIL
                         AND SENHA = @SENHA";

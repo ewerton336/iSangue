@@ -86,6 +86,40 @@ namespace iSangue.DAO
         }
 
 
+        public async Task<Doador> GetDoadorByUserID(int id)
+        {
+            try
+            {
+                string SQL = @"  SELECT
+                                D.ID idDoador
+                                ,D.NOME nome
+                                ,D.SOBRENOME sobrenome
+                                ,D.DT_NASCIMENTO dataNasc
+                                ,D.TELEFONE telefone
+                                ,D.CIDADE_DOACAO cidadeDoacao
+                                ,D.TIPO_SANGUINEO tipoSanguineo
+                                ,U.ID
+                                ,U.EMAIL 
+                               -- ,U.SENHA
+                                ,U.TIPO_USUARIO 
+                                FROM DOADOR D 
+                                inner join usuario U 
+                                on D.USUARIO_ID  = U.ID 
+                                where D.USUARIO_ID = @ID";
+
+                var result = await DbConnection.QueryFirstOrDefaultAsync<Doador>(SQL, new { ID = id });
+                DbConnection.Close();
+                return result;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+
 
 
         public async Task InserirDoador(Doador doador, int idUsuario)

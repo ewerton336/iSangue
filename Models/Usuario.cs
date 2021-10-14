@@ -10,8 +10,14 @@ namespace iSangue.Models
     {
         [Key]
         public int id { get; set; }
+
+        [Display(Name = "E-mail")]
         public string email { get; set; }
+
+        [Display(Name = "Senha")]
         public string senha { get; set; }
+
+        [Display(Name = "Tipo de Usuário")]
         public string tipoUsuario { get; set; }
     }
 }
