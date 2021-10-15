@@ -134,7 +134,7 @@ namespace iSangue.Controllers
             if (login != null)
             {
                 //return RedirectToAction(nameof(LoginSucess));
-                return  await LoginSucess(login);
+                return await LoginSucess(login);
             }
             else
             {
@@ -151,33 +151,29 @@ namespace iSangue.Controllers
 
         public async Task<IActionResult> LoginSucess(Usuario usuario)
         {
-            var chavedoador = "chave";
+
             ViewBag.nome = "Indefinido";
-            switch (usuario.tipoUsuario)
-            {
-                case "DOADOR":
 
-                    var result = await Doador.GetDoadorByUserID(usuario.id);
-                    HttpContext.Session.SetString(chavedoador, "DOADOR");
-                   
-                    ViewBag.nome = HttpContext.Session.GetString(chavedoador);     
-                    return View("LoginSucess");
-            }
+            var nome = await Usuario.GetNomeByUserId(usuario.id, usuario.tipoUsuario);
 
-           return View("LoginSucess");
+            HttpContext.Session.SetString("TIPO_USUARIO", usuario.tipoUsuario);
+            HttpContext.Session.SetString("NOME_USUARIO", nome);
+            return View("LoginSucess");
         }
 
-
-
-        public async Task<IActionResult> teste()
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            HttpContext.Session.Remove("TIPO_USUARIO");
+            HttpContext.Session.Remove("NOME_USUARIO");
+            return RedirectToAction(nameof(Login));
         }
 
-        public async Task<IActionResult> Logado()
-        {
-            return View();
-        }
+
+
+
+
+
+
 
 
 

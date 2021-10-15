@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@{ var tipoUsuario = Context.Session.GetString("TIPO_USUARIO") == null ? "" : Context.Session.GetString("TIPO_USUARIO");
+    var nomeUsuario = Context.Session.GetString("NOME_USUARIO") == null ? "" : Context.Session.GetString("NOME_USUARIO");
+    int oi = 1;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -41,55 +46,80 @@
                         </li>
 
 
+                        @{
+                            if (tipoUsuario.Equals("DOADOR") || tipoUsuario.Equals("ADMINISTRADOR"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Doador
+                                    </a>
+                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Doador
-                            </a>
-                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                               
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
-                            </div>
-                        </li>
-
-                      
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Entidade Coletora
-                            </a>
-                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Cedente Local
-                            </a>
-                            <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
-                            </div>
-                        </li>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
+                                    </div>
+                                </li>
+                            }
+                        }
 
 
+                        @{
+                            if (tipoUsuario.Equals("ENTIDADE_COLETORA") || tipoUsuario.Equals("ADMINISTRADOR"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Entidade Coletora
+                                    </a>
+                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
+                                    </div>
+                                </li>
+
+                            }
+                        }
+
+
+                        @{
+                            if (tipoUsuario.Equals("CEDENTE_LOCAL") || tipoUsuario.Equals("ADMINISTRADOR"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Cedente Local
+                                    </a>
+                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
+                                    </div>
+                                </li>
+                            }
+                        }
 
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a asp-area="" asp-controller="Doador" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Cadastro</a></li>
-                        <li><a asp-area="" asp-controller="Usuario" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        @{
+                            if (nomeUsuario.Equals(""))
+                            {
+                                <li><a asp-area="" asp-controller="Doador" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Cadastro</a></li>
+                                <li><a asp-area="" asp-controller="Usuario" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            }
+                            if (!nomeUsuario.Equals(""))
+                            {
+                                <li><a>Olá, @nomeUsuario</a> </li>
+                                <li><a asp-area="" asp-controller="Usuario" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            }}
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -119,4 +149,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-    </html>
+</html>

@@ -86,7 +86,7 @@ namespace iSangue.DAO
         }
 
 
-        public async Task<Doador> GetDoadorByUserID(int id)
+        public async Task<Doador> GetDoadorByUserID(int id, string tipoUsuario)
         {
             try
             {

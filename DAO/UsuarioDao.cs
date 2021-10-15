@@ -54,6 +54,78 @@ namespace iSangue.DAO
             return execute;
         }
 
+        public async Task<string> GetNomeByUserId(int id, string tipoUsuario)
+        {
+            try
+            {
+
+                switch (tipoUsuario)
+                {
+                    case "DOADOR":
+                        {
+                            string SQL = @"  SELECT
+                                D.NOME nome
+                                ,D.SOBRENOME sobrenome
+                                FROM DOADOR D 
+                                inner join usuario U 
+                                on D.USUARIO_ID  = U.ID 
+                                where U.ID = @ID";
+
+                            var result = await DbConnection.QueryFirstOrDefaultAsync<Doador>(SQL, new { ID = id });
+                            DbConnection.Close();
+                            string retorno = result.nome + " " + result.sobrenome;
+                            return retorno;
+                        }
+
+                    case "ENTIDADE_COLETORA":
+                        {
+                            string SQL = @" SELECT 
+                               E.NOME
+                               ,E.NOME_RESPONSAVEL nomeResponsavel
+                               FROM ENTIDADE_COLETORA E
+                               inner join usuario U 
+                               on E.USUARIO_ID  = U.ID
+                                where U.ID = @ID";
+                            var result = await DbConnection.QueryFirstAsync<EntidadeColetora>(SQL, new { ID = id });
+                            DbConnection.Close();
+                            string retorno = result.nome + " (Responsável: " + result.nomeResponsavel + ")";
+                            return retorno;
+                        }
+
+                    case "CEDENTE_LOCAL":
+                        {
+                            string SQL = @"  SELECT
+                                C.NM_CEDENTE_LOCAL nome
+                                ,C.NM_RESPONSAVEL_CEDENTE responsavel
+                                ,C.NR_TELEFONE telefone
+                                ,C.NM_ENDERECO endereco
+                                FROM CEDENTE_LOCAL C
+                                inner join usuario U 
+                                on C.USUARIO_ID  = U.ID 
+                                WHERE U.ID = @ID";
+
+                            var result = await DbConnection.QueryFirstAsync<CedenteLocal>(SQL, new { ID = id });
+                            DbConnection.Close();
+                            string retorno = result.nome + " (Responsável: " + result.responsavel + ")";
+                            return retorno;
+                        }
+
+                    case "ADMINISTRADOR":
+                        {
+                            return "Administrador";
+                        }
+                }
+
+                return "sem dados.";
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
 
     }
 }

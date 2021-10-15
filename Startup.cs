@@ -29,7 +29,7 @@ namespace iSangue
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddSession();
+            services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
         
             services.AddControllersWithViews();
             services.AddDbContext<iSangueContext>(options =>

@@ -72,6 +72,35 @@ namespace iSangue.DAO
         }
 
 
+        public async Task<EntidadeColetora> GetEntidadeByUserId(int id)
+        {
+            try
+            {
+                string SQL = @" SELECT 
+                               E.ID idEntidade
+                               ,E.NOME
+                               ,E.ENDERECO_COMERCIAL enderecoComercial
+                               ,E.TELEFONE
+                               ,E.NOME_RESPONSAVEL nomeResponsavel
+                               ,U.ID
+                               ,U.EMAIL
+                               ,U.TIPO_USUARIO tipoUsuario
+                               FROM ENTIDADE_COLETORA E
+                               inner join usuario U 
+                               on E.USUARIO_ID  = U.ID
+                                where U.ID = @ID";
+                var result = await DbConnection.QueryFirstAsync<EntidadeColetora>(SQL, new { ID = id });
+                DbConnection.Close();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+
 
 
         public async Task InserirEntidade(EntidadeColetora entidadecoletora, int idUsuario)

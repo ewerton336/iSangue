@@ -1,20 +1,14 @@
 ﻿@model iSangue.Models.Doador
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Logado com sucesso!";
+
+    var nomeUsuario = Context.Session.GetString("NOME_USUARIO");
 }
 
 
-<h3> Bem vindo @ViewBag.nome</h3>
+
+<h3> Bem vindo @nomeUsuario!</h3>
+
 
 <h3 class="bg-info"> Logado com sucesso!</h3>
-
-
-<p>TODO: Armazenar session</p>
-
-
-<form method="post">
-    <input name="entrada" type="text" />
-
-    <input type="submit" />
-
-</form>
