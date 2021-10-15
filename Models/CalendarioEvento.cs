@@ -11,9 +11,11 @@ namespace iSangue.Models
         public int id { get; set; }
 
         [Display(Name = "Nome do Evento")]
+        [DataType(DataType.Text)]
         public string nomeEvento { get; set; }
 
         [Display(Name = "Data do Evento")]
+        [DataType(DataType.DateTime)]
         public DateTime dataEvento { get; set; }
 
         [Display(Name = "Quantidade de interessados")]

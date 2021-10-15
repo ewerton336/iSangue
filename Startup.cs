@@ -41,7 +41,6 @@ namespace iSangue
         {
             if (env.IsDevelopment())
             {
-                app.UseSession();
                 app.UseDeveloperExceptionPage();
                 
             }
@@ -53,11 +52,9 @@ namespace iSangue
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

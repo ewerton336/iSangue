@@ -18,6 +18,7 @@ namespace iSangue.Models
         public string sobrenome { get; set; }
 
         [Display(Name = "Data de nascimento")]
+        [DataType(DataType.DateTime)]
         public string dataNasc { get; set; }
 
         [Display(Name = "Telefone")]
