@@ -1,17 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @{ var tipoUsuario = Context.Session.GetString("TIPO_USUARIO") == null ? "" : Context.Session.GetString("TIPO_USUARIO");
     var nomeUsuario = Context.Session.GetString("NOME_USUARIO") == null ? "" : Context.Session.GetString("NOME_USUARIO");
-    int oi = 1;
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - iSangue</title>
+    <link rel="icon" href="~/img/isangue-logo.png">
     <!--<a href="/">My comment
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" /></a> -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />  -->
+    <link rel="stylesheet" href="~/css/site.css"/></a>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,7 +21,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #E15153; ">
             <div class="container">
                 <img class="img-fluid" src="~/img/isangue-logo.png" alt="Card image cap" style="width: 25px;height: 25px">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">iSangue</a>
@@ -33,18 +32,17 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Teste">Teste</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Teste">Teste</a>
                         </li>
-
 
                         @{
                             if (tipoUsuario.Equals("DOADOR") || tipoUsuario.Equals("ADMINISTRADOR"))
@@ -55,16 +53,15 @@
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
 
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
                             }
                         }
-
 
                         @{
                             if (tipoUsuario.Equals("ENTIDADE_COLETORA") || tipoUsuario.Equals("ADMINISTRADOR"))
@@ -74,11 +71,11 @@
                                         Entidade Coletora
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
 
@@ -94,11 +91,11 @@
                                         Cedente Local
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
                             }
@@ -110,13 +107,13 @@
                         @{
                             if (nomeUsuario.Equals(""))
                             {
-                                <li><a asp-area="" asp-controller="Doador" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Cadastro</a></li>
-                                <li><a asp-area="" asp-controller="Usuario" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                <li><a class="text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Cadastro</a></li>
+                                <li><a class="text-light bg-transparent" asp-area="" asp-controller="Usuario" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                             }
                             if (!nomeUsuario.Equals(""))
                             {
-                                <li><a>Olá, @nomeUsuario</a> </li>
-                                <li><a asp-area="" asp-controller="Usuario" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                <li><a class="text-light bg-transparent">Olá, @nomeUsuario</a> </li>
+                                <li><a class="text-light bg-transparent" asp-area="" asp-controller="Usuario" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                             }}
                     </ul>
 
