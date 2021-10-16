@@ -38,26 +38,24 @@
                             <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
                         </li>
                         <li class="nav-item">
-                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre nós</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Teste">Teste</a>
-                        </li>
+                       
 
                         @{
                             if (tipoUsuario.Equals("DOADOR") || tipoUsuario.Equals("ADMINISTRADOR"))
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Doador
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
 
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
                             }
@@ -67,15 +65,15 @@
                             if (tipoUsuario.Equals("ENTIDADE_COLETORA") || tipoUsuario.Equals("ADMINISTRADOR"))
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Entidade Coletora
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="EntidadeColetora" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
 
@@ -87,15 +85,15 @@
                             if (tipoUsuario.Equals("CEDENTE_LOCAL") || tipoUsuario.Equals("ADMINISTRADOR"))
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Cedente Local
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
-                                        <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Edit">Editar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Details">Detalhes</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CedenteLocal" asp-action="Delete">Deletar</a>
                                     </div>
                                 </li>
                             }
