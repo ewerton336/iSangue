@@ -33,7 +33,7 @@ namespace iSangue
         
             services.AddControllersWithViews();
             services.AddDbContext<iSangueContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("iSangueContext")));
+                options.UseMySql(Configuration.GetConnectionString("iSangueContext"), ServerVersion.AutoDetect(Configuration.GetConnectionString("iSangueContext"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

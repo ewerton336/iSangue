@@ -1,0 +1,65 @@
+﻿@model IEnumerable<iSangue.Models.CalendarioEvento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantidadeInteressados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.enderecoLocalColeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroEnderecoLocalColeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.entidadeColetora)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantidadeInteressados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.enderecoLocalColeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeroEnderecoLocalColeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.entidadeColetora)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

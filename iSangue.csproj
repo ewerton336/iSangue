@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Folder Include="Views\CalendarioEvento\" />
 	  <Folder Include="Views\Administrador\" />
 	  <Folder Include="Views\Administrador\" />
   </ItemGroup>
@@ -21,15 +20,14 @@
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.18" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="MySql.Data" Version="8.0.26" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
-    <PackageReference Include="MySqlConnector" Version="1.3.13" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.2" />
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\img\estrelinhas.png" />
     <None Include="wwwroot\img\Ewrton.png" />

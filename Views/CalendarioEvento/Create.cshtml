@@ -1,0 +1,55 @@
+﻿@model iSangue.Models.CalendarioEvento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CalendarioEvento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nomeEvento" class="control-label"></label>
+                <input asp-for="nomeEvento" class="form-control" />
+                <span asp-validation-for="nomeEvento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataEvento" class="control-label"></label>
+                <input asp-for="dataEvento" class="form-control" />
+                <span asp-validation-for="dataEvento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantidadeInteressados" class="control-label"></label>
+                <input asp-for="quantidadeInteressados" class="form-control" />
+                <span asp-validation-for="quantidadeInteressados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="enderecoLocalColeta" class="control-label"></label>
+                <input asp-for="enderecoLocalColeta" class="form-control" />
+                <span asp-validation-for="enderecoLocalColeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numeroEnderecoLocalColeta" class="control-label"></label>
+                <input asp-for="numeroEnderecoLocalColeta" class="form-control" />
+                <span asp-validation-for="numeroEnderecoLocalColeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="entidadeColetora" class="control-label"></label>
+                <input asp-for="entidadeColetora" class="form-control" />
+                <span asp-validation-for="entidadeColetora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
