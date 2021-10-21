@@ -10,7 +10,7 @@ namespace iSangue.Models
 
     public class CalendarioEvento
     {
-        [Required, Key]
+        [Key]
         public int id { get; set; }
 
         [Display(Name = "Nome do Evento")]
