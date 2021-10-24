@@ -7,40 +7,59 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
+using iSangue.DAO;
 
 namespace iSangue.Controllers
 {
     public class CalendarioEventoController : Controller
     {
         private readonly iSangueContext _context;
+        private CalendarioEventoDao calendarioEventoDao;
 
         public CalendarioEventoController(iSangueContext context)
         {
             _context = context;
         }
 
+        CalendarioEventoDao CalendarioEvento
+        {
+            get
+            {
+                if (calendarioEventoDao == null)
+                {
+                    calendarioEventoDao = new CalendarioEventoDao(Helper.DBConnectionSql);
+                }
+                return calendarioEventoDao;
+            }
+            set
+            {
+                calendarioEventoDao = value;
+            }
+        }
+
+
         // GET: CalendarioEvento
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CalendarioEvento.ToListAsync());
+            return View(await CalendarioEvento.GetCalendariosEventos());
         }
 
         // GET: CalendarioEvento/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+           if (id == 0)
             {
                 return NotFound();
             }
 
-            var calendarioEvento = await _context.CalendarioEvento
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (calendarioEvento == null)
+            var evento = await CalendarioEvento.GetEventoById(id);
+
+            if (evento == null)
             {
                 return NotFound();
             }
 
-            return View(calendarioEvento);
+            return View(evento);
         }
 
         // GET: CalendarioEvento/Create
@@ -50,35 +69,27 @@ namespace iSangue.Controllers
         }
 
         // POST: CalendarioEvento/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nomeEvento,dataEvento,quantidadeInteressados,enderecoLocalColeta,numeroEnderecoLocalColeta,entidadeColetora")] CalendarioEvento calendarioEvento)
+        public async Task<IActionResult> Create([Bind("id,nomeEvento,dataEvento,quantidadeInteressados,entidadeColetoraID,cedenteLocalID")] CalendarioEvento calendarioEvento)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(calendarioEvento);
-                await _context.SaveChangesAsync();
+                await CalendarioEvento.InserirEvento(calendarioEvento);
                 return RedirectToAction(nameof(Index));
             }
             return View(calendarioEvento);
         }
 
         // GET: CalendarioEvento/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var evento = await CalendarioEvento.GetEventoById(id);
+            if (evento == null)
             {
                 return NotFound();
             }
-
-            var calendarioEvento = await _context.CalendarioEvento.FindAsync(id);
-            if (calendarioEvento == null)
-            {
-                return NotFound();
-            }
-            return View(calendarioEvento);
+            return View(evento);
         }
 
         // POST: CalendarioEvento/Edit/5
@@ -86,7 +97,7 @@ namespace iSangue.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nomeEvento,dataEvento,quantidadeInteressados,enderecoLocalColeta,numeroEnderecoLocalColeta,entidadeColetora")] CalendarioEvento calendarioEvento)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nomeEvento,dataEvento,quantidadeInteressados,entidadeColetoraID,cedenteLocalID")] CalendarioEvento calendarioEvento)
         {
             if (id != calendarioEvento.id)
             {
@@ -97,8 +108,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    _context.Update(calendarioEvento);
-                    await _context.SaveChangesAsync();
+                    await CalendarioEvento.AtualizarEvento(calendarioEvento);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +127,10 @@ namespace iSangue.Controllers
         }
 
         // GET: CalendarioEvento/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var calendarioEvento = await _context.CalendarioEvento
-                .FirstOrDefaultAsync(m => m.id == id);
+            var calendarioEvento = await CalendarioEvento.GetEventoById(id);
             if (calendarioEvento == null)
             {
                 return NotFound();
@@ -139,9 +144,8 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var calendarioEvento = await _context.CalendarioEvento.FindAsync(id);
-            _context.CalendarioEvento.Remove(calendarioEvento);
-            await _context.SaveChangesAsync();
+            var calendarioEvento = await CalendarioEvento.GetEventoById(id);
+            await CalendarioEvento.DeletarEvento(calendarioEvento.id);;
             return RedirectToAction(nameof(Index));
         }
 

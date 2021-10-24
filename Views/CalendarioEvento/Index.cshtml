@@ -22,13 +22,10 @@
                 @Html.DisplayNameFor(model => model.quantidadeInteressados)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.enderecoLocalColeta)
+                @Html.DisplayNameFor(model => model.entidadeColetoraID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.numeroEnderecoLocalColeta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.entidadeColetora)
+                @Html.DisplayNameFor(model => model.cedenteLocalID)
             </th>
             <th></th>
         </tr>
@@ -46,13 +43,10 @@
                 @Html.DisplayFor(modelItem => item.quantidadeInteressados)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.enderecoLocalColeta)
+                @Html.DisplayFor(modelItem => item.entidadeColetoraID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.numeroEnderecoLocalColeta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.entidadeColetora)
+                @Html.DisplayFor(modelItem => item.cedenteLocalID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
