@@ -19,8 +19,8 @@ namespace iSangue.Controllers
         private UsuarioDao usuarioDao;
         private string usuario;
         public string email;
-      
-     
+
+
         public DoadorController(iSangueContext context)
         {
             _context = context;
@@ -57,13 +57,13 @@ namespace iSangue.Controllers
             }
         }
 
-     private string usuarioSession
+        private string usuarioSession
         {
             get
             {
                 if (usuario == null)
                 {
-                    usuario= HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
+                    usuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
                 }
                 return usuario;
             }
@@ -74,7 +74,7 @@ namespace iSangue.Controllers
             }
         }
 
-        public string emailSession
+        private string emailSession
         {
             get
             {
@@ -98,7 +98,7 @@ namespace iSangue.Controllers
             if (usuarioSession.Equals("ADMINISTRADOR") || usuario.Equals("DOADOR"))
             {
                 return View(await Doador.GetDoadores());
-            } 
+            }
             else
             {
                 return Redirect("../Error/NotAuthorized");
@@ -141,12 +141,12 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
-                 await Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
+                await Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
                 int idCriada = await Usuario.getIdByEmail(doador.email);
                 await Doador.InserirDoador(doador, idCriada);
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(doador);
         }
 
@@ -162,7 +162,7 @@ namespace iSangue.Controllers
             {
                 return View(doador);
             }
-            if (doador == null || doador.email != emailSession)
+            if (doador.email != emailSession)
             {
                 return Redirect("../Error/NotAuthorized");
             }

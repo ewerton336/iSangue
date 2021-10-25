@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
 using iSangue.DAO;
-
+using Microsoft.AspNetCore.Http;
 
 namespace iSangue.Controllers
 {
@@ -17,6 +17,8 @@ namespace iSangue.Controllers
         private readonly iSangueContext _context;
         private EntidadeColetoraDao entidadeColetoraDao;
         private UsuarioDao usuarioDao;
+        private string usuario;
+        private string email;
 
         public EntidadeColetoraController(iSangueContext context)
         {
@@ -56,7 +58,39 @@ namespace iSangue.Controllers
             }
         }
 
+        private string usuarioSession
+        {
+            get
+            {
+                if (usuario == null)
+                {
+                    usuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
+                }
+                return usuario;
+            }
 
+            set
+            {
+                usuario = value;
+            }
+        }
+
+        private string emailSession
+        {
+            get
+            {
+                if (email == null)
+                {
+                    email = HttpContext.Session.GetString("EMAIL_USUARIO") == null ? "" : HttpContext.Session.GetString("EMAIL_USUARIO");
+                }
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
 
 
 
@@ -64,18 +98,29 @@ namespace iSangue.Controllers
         // GET: EntidadeColetora
         public async Task<IActionResult> Index()
         {
-            return View(await Entidade.GetEntidades());
+            if (usuarioSession.Equals("ADMINISTRADOR") || usuario.Equals("ENTIDADE_COLETORA"))
+            {
+                return View(await Entidade.GetEntidades());
+            }
+            else
+            {
+                return Redirect("../Error/NotAuthorized");
+            }
         }
 
         // GET: EntidadeColetora/Details/5
         public async Task<IActionResult> Details(int id)
         {
             var entidadeColetora = await Entidade.GetEntidadeById(id);
-            if (entidadeColetora == null)
+            if (usuarioSession == "ADMINISTRADOR")
             {
-                return NotFound();
+                return View(entidadeColetora);
             }
 
+            if (entidadeColetora == null || entidadeColetora.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
+            }
             return View(entidadeColetora);
         }
 
@@ -86,8 +131,6 @@ namespace iSangue.Controllers
         }
 
         // POST: EntidadeColetora/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("idEntidade,nome,enderecoComercial,telefone,nomeResponsavel,id,email,senha,tipoUsuario")] EntidadeColetora entidadeColetora)
@@ -105,11 +148,18 @@ namespace iSangue.Controllers
         // GET: EntidadeColetora/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-
-            var entidadeColetora = await Entidade .GetEntidadeById(id);
+            var entidadeColetora = await Entidade.GetEntidadeById(id);
             if (entidadeColetora == null)
             {
                 return NotFound();
+            }
+            if (usuarioSession == "ADMINISTRADOR")
+            {
+                return View(entidadeColetora);
+            }
+            if (entidadeColetora.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
             }
             return View(entidadeColetora);
         }
@@ -131,7 +181,7 @@ namespace iSangue.Controllers
             {
                 try
                 {
-                    await Entidade .AtualizarEntidade(entidadeColetora);
+                    await Entidade.AtualizarEntidade(entidadeColetora);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,12 +202,16 @@ namespace iSangue.Controllers
         // GET: EntidadeColetora/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var entidade = await Entidade .GetEntidadeById(id);
-            if (entidade == null)
+            var entidade = await Entidade.GetEntidadeById(id);
+            if (usuarioSession == "ADMINISTRADOR")
             {
-                return NotFound();
+                return View(entidade);
             }
 
+            if (entidade == null || entidade.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
+            }
             return View(entidade);
         }
 
@@ -166,7 +220,7 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entidade = await Entidade .GetEntidadeById(id);
+            var entidade = await Entidade.GetEntidadeById(id);
             await usuarioDao.Delete(entidade.id);
             return RedirectToAction(nameof(Index));
         }

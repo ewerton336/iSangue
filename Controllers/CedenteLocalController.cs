@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
 using iSangue.DAO;
+using Microsoft.AspNetCore.Http;
 
 namespace iSangue.Controllers
 {
@@ -16,6 +17,8 @@ namespace iSangue.Controllers
         private readonly iSangueContext _context;
         private CedenteLocalDao cedenteLocalDao;
         private UsuarioDao usuarioDao;
+        private string usuario;
+        private string email;
 
         public CedenteLocalController(iSangueContext context)
         {
@@ -54,11 +57,52 @@ namespace iSangue.Controllers
             }
         }
 
+        private string usuarioSession
+        {
+            get
+            {
+                if (usuario == null)
+                {
+                    usuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
+                }
+                return usuario;
+            }
+
+            set
+            {
+                usuario = value;
+            }
+        }
+
+        private string emailSession
+        {
+            get
+            {
+                if (email == null)
+                {
+                    email = HttpContext.Session.GetString("EMAIL_USUARIO") == null ? "" : HttpContext.Session.GetString("EMAIL_USUARIO");
+                }
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
 
         // GET: CedenteLocal
         public async Task<IActionResult> Index()
         {
-            return View(await Cedente.GetCedenteLocals());
+            if (usuarioSession.Equals("ADMINISTRADOR") || usuario.Equals("CEDENTE_LOCAL"))
+            {
+                return View(await Cedente.GetCedenteLocals());
+            }
+            else
+            {
+                return Redirect("../Error/NotAuthorized");
+            }
+            
         }
 
         // GET: CedenteLocal/Details/5
@@ -71,9 +115,14 @@ namespace iSangue.Controllers
 
             var cedente = await Cedente .GetCedenteById(id);
 
-            if (cedente == null)
+            if (usuarioSession == "ADMINISTRADOR")
             {
-                return NotFound();
+                return View(cedente);
+            }
+
+            if (cedente == null || cedente.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
             }
 
             return View(cedente);
@@ -109,6 +158,14 @@ namespace iSangue.Controllers
             if (cedente == null)
             {
                 return NotFound();
+            }
+            if (usuarioSession == "ADMINISTRADOR")
+            {
+                return View(cedente);
+            }
+            if (cedente == null || cedente.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
             }
             return View(cedente);
         }
@@ -152,9 +209,14 @@ namespace iSangue.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var cedente = await Cedente.GetCedenteById(id);
-            if (cedente == null)
+            if (usuarioSession == "ADMINISTRADOR")
             {
-                return NotFound();
+                return View(cedente);
+            }
+
+            if (cedente == null || cedente.email != emailSession)
+            {
+                return Redirect("../Error/NotAuthorized");
             }
 
             return View(cedente);
