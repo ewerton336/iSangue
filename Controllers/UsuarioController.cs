@@ -158,6 +158,7 @@ namespace iSangue.Controllers
 
             HttpContext.Session.SetString("TIPO_USUARIO", usuario.tipoUsuario);
             HttpContext.Session.SetString("NOME_USUARIO", nome);
+            HttpContext.Session.SetString("EMAIL_USUARIO", usuario.email);
             return View("LoginSucess");
         }
 
