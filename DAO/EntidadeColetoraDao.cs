@@ -19,11 +19,11 @@ namespace iSangue.DAO
         {
             try
             {
-                string SQL = @"SELECT 
+                string sql = @"SELECT 
                                E.ID idEntidade
-                               ,E.NOME
+                               ,E.NOME nome
                                ,E.ENDERECO_COMERCIAL enderecoComercial
-                               ,E.TELEFONE
+                               ,E.TELEFONE telefone
                                ,E.NOME_RESPONSAVEL nomeResponsavel
                                ,U.ID
                                ,U.EMAIL
@@ -31,7 +31,7 @@ namespace iSangue.DAO
                                FROM ENTIDADE_COLETORA E
                                inner join usuario U 
                                on E.USUARIO_ID  = U.ID"; 
-                var result = await DbConnection.QueryAsync<EntidadeColetora>(SQL);
+                var result = await DbConnection.QueryAsync<EntidadeColetora>(sql);
                 DbConnection.Close();
                 return result;
             }

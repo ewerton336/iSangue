@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Create";
+    var cedentes = ViewBag.cedentes;
+    var entidades = ViewBag.entidades;
+    
 }
 
 <h1>Create</h1>
@@ -21,11 +24,6 @@
                 <label asp-for="dataEvento" class="control-label"></label>
                 <input asp-for="dataEvento" class="form-control" />
                 <span asp-validation-for="dataEvento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="quantidadeInteressados" class="control-label"></label>
-                <input asp-for="quantidadeInteressados" class="form-control" />
-                <span asp-validation-for="quantidadeInteressados" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="entidadeColetoraID" class="control-label"></label>

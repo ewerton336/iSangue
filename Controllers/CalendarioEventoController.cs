@@ -47,7 +47,7 @@ namespace iSangue.Controllers
         // GET: CalendarioEvento/Details/5
         public async Task<IActionResult> Details(int id)
         {
-           if (id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -65,6 +65,8 @@ namespace iSangue.Controllers
         // GET: CalendarioEvento/Create
         public IActionResult Create()
         {
+            ViewBag.cedentes = new CedenteLocalDao(Helper.DBConnectionSql).GetCedenteLocals().Result;
+            ViewBag.entidades = new EntidadeColetoraDao(Helper.DBConnectionSql).GetEntidades().Result;
             return View();
         }
 
@@ -145,7 +147,7 @@ namespace iSangue.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var calendarioEvento = await CalendarioEvento.GetEventoById(id);
-            await CalendarioEvento.DeletarEvento(calendarioEvento.id);;
+            await CalendarioEvento.DeletarEvento(calendarioEvento.id); ;
             return RedirectToAction(nameof(Index));
         }
 

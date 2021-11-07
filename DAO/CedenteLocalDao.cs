@@ -18,8 +18,6 @@ namespace iSangue.DAO
         }
         public async Task<IEnumerable<CedenteLocal>> GetCedenteLocals()
         {
-
-
             try
             {
                 string SQL = @"SELECT
@@ -100,7 +98,7 @@ namespace iSangue.DAO
                                  , @ENDERECO
                                  , @RESPONSAVEL
                                  , @USUARIO_ID)";
-                                 
+
 
                 var execute = await DbConnection.ExecuteAsync(sql, new
                 {
