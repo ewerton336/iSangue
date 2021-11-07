@@ -15,6 +15,8 @@ namespace iSangue.Controllers
     {
         private readonly iSangueContext _context;
         private CalendarioEventoDao calendarioEventoDao;
+        private EntidadeColetoraDao entidadeColetoraDao;
+        private CedenteLocalDao cedenteLocalDao;
 
         public CalendarioEventoController(iSangueContext context)
         {
@@ -37,11 +39,52 @@ namespace iSangue.Controllers
             }
         }
 
+        EntidadeColetoraDao EntidadeColetora
+        {
+            get
+            {
+                if (entidadeColetoraDao == null)
+                {
+                    entidadeColetoraDao = new EntidadeColetoraDao(Helper.DBConnectionSql);
+                }
+                return entidadeColetoraDao;
+            }
+            set
+            {
+                entidadeColetoraDao = value;
+            }
+        }
+        CedenteLocalDao CedenteLocal
+        {
+            get
+            {
+                if (cedenteLocalDao == null)
+                {
+                    cedenteLocalDao = new CedenteLocalDao(Helper.DBConnectionSql);
+                }
+                return cedenteLocalDao;
+            }
+            set
+            {
+                cedenteLocalDao = value;
+            }
+        }
+
 
         // GET: CalendarioEvento
         public async Task<IActionResult> Index()
         {
-            return View(await CalendarioEvento.GetCalendariosEventos());
+
+            IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
+            foreach (var evento in eventos)
+            {
+                var entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                var cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
+                evento.nomeEntidadeColetora = entidadeColetora == null ? "sem dados" : entidadeColetora.nome;
+                evento.nomeCedenteLocal = cedenteLocal == null ? "sem dados" : cedenteLocal.nome;
+            }
+            
+            return View(eventos);
         }
 
         // GET: CalendarioEvento/Details/5

@@ -53,21 +53,20 @@ namespace iSangue.DAO
         {
             try
             {
-                string SQL = @"  SELECT
-                                C.ID IDCedente
-                                ,C.NM_CEDENTE_LOCAL nome
-                                ,C.NM_RESPONSAVEL_CEDENTE responsavel
-                                ,C.NR_TELEFONE telefone
-                                ,C.NM_ENDERECO endereco
-                                ,U.ID 
-                                ,U.EMAIL 
-                                ,U.TIPO_USUARIO tipoUsuario
+                string SQL = @"                   select C.ID IDCedente
+                            ,C.NM_CEDENTE_LOCAL nome
+                           	,C.NM_RESPONSAVEL_CEDENTE responsavel
+                           	,C.NR_TELEFONE telefone
+                           	,C.NM_ENDERECO endereco
+                       --    	 ,U.ID
+                       --    ,U.EMAIL 
+                       --     ,U.TIPO_USUARIO tipoUsuario
+                       --   inner join usuario U 
+                      --         on C.USUARIO_ID  = U.ID 
                                 FROM CEDENTE_LOCAL C
-                                inner join usuario U 
-                                on C.USUARIO_ID  = U.ID 
-                                WHERE C.ID = @ID";
+                                where id = @ID;";
 
-                var result = await DbConnection.QueryFirstAsync<CedenteLocal>(SQL, new { ID = id });
+                var result = await DbConnection.QueryFirstOrDefaultAsync<CedenteLocal>(SQL, new { ID = id });
                 DbConnection.Close();
                 return result;
 

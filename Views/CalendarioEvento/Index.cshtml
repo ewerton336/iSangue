@@ -2,59 +2,63 @@
 
 @{
     ViewData["Title"] = "Index";
-}
+    var teste = (IEnumerable<EntidadeColetora>) ViewBag.teste;
+    }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Cadastrar novo evento</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nomeEvento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dataEvento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.quantidadeInteressados)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.entidadeColetoraID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cedenteLocalID)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Cadastrar novo evento</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nomeEvento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dataEvento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.quantidadeInteressados)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.entidadeColetoraID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cedenteLocalID)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.nomeEvento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dataEvento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.quantidadeInteressados)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nomeEntidadeColetora)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nomeCedenteLocal)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nomeEvento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dataEvento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantidadeInteressados)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nomeEntidadeColetora)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nomeCedenteLocal)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
