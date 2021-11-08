@@ -26,6 +26,7 @@ namespace iSangue.DAO
                                 ,C.NM_RESPONSAVEL_CEDENTE responsavel
                                 ,C.NR_TELEFONE telefone
                                 ,C.NM_ENDERECO endereco
+                                 ,C.NM_CIDADE cidade
                                 ,U.ID 
                                 ,U.EMAIL 
                                -- ,U.SENHA
@@ -58,6 +59,7 @@ namespace iSangue.DAO
                            	,C.NM_RESPONSAVEL_CEDENTE responsavel
                            	,C.NR_TELEFONE telefone
                            	,C.NM_ENDERECO endereco
+                            ,C.NM_CIDADE cidade
                        --    	 ,U.ID
                        --    ,U.EMAIL 
                        --     ,U.TIPO_USUARIO tipoUsuario
@@ -89,12 +91,14 @@ namespace iSangue.DAO
                               (nm_cedente_local
                               ,nr_telefone
                               ,nm_endereco
+                               ,nm_cidade
                               ,nm_responsavel_cedente
                               ,USUARIO_ID)
                          VALUES(
                                    @NOME
                                  , @TELEFONE
                                  , @ENDERECO
+                                 , @CIDADE
                                  , @RESPONSAVEL
                                  , @USUARIO_ID)";
 
@@ -104,6 +108,7 @@ namespace iSangue.DAO
                     NOME = cedente.nome,
                     TELEFONE = cedente.telefone,
                     ENDERECO = cedente.endereco,
+                    CIDADE = cedente.cidade,
                     RESPONSAVEL = cedente.responsavel,
                     USUARIO_ID = idUsuario
                 }); ;
@@ -126,6 +131,7 @@ namespace iSangue.DAO
                           , NM_RESPONSAVEL_CEDENTE=@RESPONSAVEL
                           , NR_TELEFONE=@TEL
                           , NM_ENDERECO=@END
+                          , NM_CIDADE=@CIDADE
                             WHERE ID=@ID;";
                 var execute = await DbConnection.ExecuteAsync(sql, new
                 {
@@ -133,6 +139,7 @@ namespace iSangue.DAO
                     RESPONSAVEL = cedente.responsavel,
                     TEL = cedente.telefone,
                     END = cedente.endereco,
+                    CIDADE = cedente.cidade,
                     ID = cedente.id
                 });
                 DbConnection.Close();

@@ -31,9 +31,9 @@ namespace iSangue.Models
         public int cedenteLocalID { get; set; }
 
         [Display(Name = "Entidade Coletora")]
-        public string nomeEntidadeColetora { get; set; }
+       public EntidadeColetora entidadeColetora { get; set; }
 
         [Display(Name = "Local")]
-        public string nomeCedenteLocal { get; set; }
+        public CedenteLocal cedenteLocal { get; set; }
     }
 }

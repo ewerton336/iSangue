@@ -19,6 +19,9 @@ namespace iSangue.Models
         [Display(Name = "Endereço")]
         public string endereco { get; set; }
 
+        [Display(Name = "cidade")]
+        public string cidade { get; set; }
+
         [Display(Name = "Responsável")]
         public string responsavel { get; set; }
     }

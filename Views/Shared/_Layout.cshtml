@@ -35,7 +35,7 @@
                             <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                            <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="ComoFunciona">Como Funciona</a>
                         </li>
                         <li class="nav-item">
                             <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre nós</a>
@@ -80,7 +80,6 @@
                             }
                         }
 
-
                         @{
                             if (tipoUsuario.Equals("CEDENTE_LOCAL") || tipoUsuario.Equals("ADMINISTRADOR"))
                             {
@@ -99,6 +98,10 @@
                             }
                         }
 
+
+
+
+
                         @{
                             if (tipoUsuario.Equals("ADMINISTRADOR"))
                             {
@@ -108,10 +111,26 @@
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="ListarEventos">Listar eventos (view de usuário)</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="Create">Cadastro</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="Index">Editar</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="Index">Detalhes</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="Index">Deletar</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+
+
+                        @{
+                            if (!tipoUsuario.Equals("ADMINISTRADOR"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Calendário de Eventos
+                                    </a>
+                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="CalendarioEvento" asp-action="ListarEventos">Ver todos os Eventos</a>
                                     </div>
                                 </li>
                             }

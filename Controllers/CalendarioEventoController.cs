@@ -78,12 +78,24 @@ namespace iSangue.Controllers
             IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
             foreach (var evento in eventos)
             {
-                var entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
-                var cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
-                evento.nomeEntidadeColetora = entidadeColetora == null ? "sem dados" : entidadeColetora.nome;
-                evento.nomeCedenteLocal = cedenteLocal == null ? "sem dados" : cedenteLocal.nome;
+                evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
             }
             
+            return View(eventos);
+        }
+
+
+        //GET: ListarEventos
+        public async Task<IActionResult> ListarEventos()
+        {
+
+            IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
+            foreach (var evento in eventos)
+            {
+                evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
+            }
             return View(eventos);
         }
 

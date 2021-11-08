@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    var teste = (IEnumerable<EntidadeColetora>) ViewBag.teste;
     }
 
 
@@ -26,10 +25,10 @@
                     @Html.DisplayNameFor(model => model.quantidadeInteressados)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.nomeEntidadeColetora)
+                    @Html.DisplayNameFor(model => model.entidadeColetora.nome)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.nomeCedenteLocal)
+                    @Html.DisplayNameFor(model => model.cedenteLocal.nome)
                 </th>
                 <th></th>
             </tr>
@@ -48,10 +47,10 @@
                         @Html.DisplayFor(modelItem => item.quantidadeInteressados)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.nomeEntidadeColetora)
+                        @Html.DisplayFor(modelItem => item.entidadeColetora.nome)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.nomeCedenteLocal)
+                        @Html.DisplayFor(modelItem => item.cedenteLocal.nome)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
