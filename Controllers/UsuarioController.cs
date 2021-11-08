@@ -159,6 +159,7 @@ namespace iSangue.Controllers
             HttpContext.Session.SetString("TIPO_USUARIO", usuario.tipoUsuario);
             HttpContext.Session.SetString("NOME_USUARIO", nome);
             HttpContext.Session.SetString("EMAIL_USUARIO", usuario.email);
+            HttpContext.Session.SetString("ID_USUARIO", usuario.id.ToString());
             return View("LoginSucess");
         }
 
@@ -166,6 +167,8 @@ namespace iSangue.Controllers
         {
             HttpContext.Session.Remove("TIPO_USUARIO");
             HttpContext.Session.Remove("NOME_USUARIO");
+            HttpContext.Session.Remove("EMAIL_USUARIO");
+            HttpContext.Session.Remove("ID_USUARIO");
             return RedirectToAction(nameof(Login));
         }
 

@@ -120,8 +120,8 @@ namespace iSangue.Controllers
         // GET: CalendarioEvento/Create
         public IActionResult Create()
         {
-            ViewBag.cedentes = new CedenteLocalDao(Helper.DBConnectionSql).GetCedenteLocals().Result;
-            ViewBag.entidades = new EntidadeColetoraDao(Helper.DBConnectionSql).GetEntidades().Result;
+            ViewData["cedentes"] = new CedenteLocalDao(Helper.DBConnectionSql).GetCedenteLocals().Result;
+            ViewData["entidades"] = new EntidadeColetoraDao(Helper.DBConnectionSql).GetEntidades().Result;
             return View();
         }
 
@@ -141,6 +141,8 @@ namespace iSangue.Controllers
         // GET: CalendarioEvento/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
+            ViewData["cedentes"] = new CedenteLocalDao(Helper.DBConnectionSql).GetCedenteLocals().Result;
+            ViewData["entidades"] = new EntidadeColetoraDao(Helper.DBConnectionSql).GetEntidades().Result;
             var evento = await CalendarioEvento.GetEventoById(id);
             if (evento == null)
             {

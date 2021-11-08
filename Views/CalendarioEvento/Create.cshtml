@@ -1,13 +1,11 @@
 ﻿@model iSangue.Models.CalendarioEvento
+@using iSangue.Models;
 
 @{
     ViewData["Title"] = "Create";
-    var cedentes = ViewBag.cedentes;
-    var entidades = ViewBag.entidades;
-    
 }
 
-<h1>Create</h1>
+<h1>Criar Evento</h1>
 
 <h4>CalendarioEvento</h4>
 <hr />
@@ -26,13 +24,27 @@
                 <span asp-validation-for="dataEvento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="entidadeColetoraID" class="control-label"></label>
-                <input asp-for="entidadeColetoraID" class="form-control" />
-                <span asp-validation-for="entidadeColetoraID" class="text-danger"></span>
+                <label asp-for="entidadeColetoraID" class="control-label">Entidade Coletora</label>
+                <select class="form-control" asp-for="entidadeColetoraID">
+                    @{
+                        var entidadesColetoras = (IEnumerable<EntidadeColetora>)ViewData["entidades"];
+                        foreach (var entidade in entidadesColetoras)
+                        {
+                            <option value="@entidade.idEntidade">@entidade.nome</option>
+                        }}
+                </select>
+                <span asp-validation-for="cedenteLocalID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="cedenteLocalID" class="control-label"></label>
-                <input asp-for="cedenteLocalID" class="form-control" />
+                <select class="form-control" asp-for="cedenteLocalID">
+                    @{
+                        var cedenteLocals = (IEnumerable<CedenteLocal>)ViewData["cedentes"];
+                        foreach (var cedente in cedenteLocals)
+                        {
+                            <option value="@cedente.IDCedente">@cedente.nome</option>
+                        }}
+                </select>
                 <span asp-validation-for="cedenteLocalID" class="text-danger"></span>
             </div>
             <div class="form-group">

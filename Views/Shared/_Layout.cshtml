@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @{ var tipoUsuario = Context.Session.GetString("TIPO_USUARIO") == null ? "" : Context.Session.GetString("TIPO_USUARIO");
     var nomeUsuario = Context.Session.GetString("NOME_USUARIO") == null ? "" : Context.Session.GetString("NOME_USUARIO");
+    var idUsuario = Context.Session.GetString("ID_USUARIO") == null ? "" : Context.Session.GetString("ID_USUARIO");
+    var editPage = idUsuario.Equals("") ? "" : "Edit/" + idUsuario;
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +13,7 @@
     <link rel="icon" href="~/img/isangue-logo.png">
     <!--<a href="/">My comment
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />  -->
-    <link rel="stylesheet" href="~/css/site.css"/></a>
+    <link rel="stylesheet" href="~/css/site.css" /></a>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -30,7 +33,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav ">
                         <li class="nav-item">
                             <a class="dropdown-item text-light bg-transparent" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
@@ -43,7 +46,7 @@
 
 
                         @{
-                            if (tipoUsuario.Equals("DOADOR") || tipoUsuario.Equals("ADMINISTRADOR"))
+                            if (tipoUsuario.Equals("ADMINISTRADOR"))
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +54,26 @@
                                     </a>
                                     <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
 
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Listar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="IndexAdmin">Listar (Administrador)</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Editar</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Detalhes</a>
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Deletar</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+
+                        @{
+                            if (tipoUsuario.Equals("DOADOR"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Doador
+                                    </a>
+                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="IndexAdmin">Listar (Administrador)</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Editar</a>
                                         <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Detalhes</a>
@@ -147,7 +169,7 @@
                             }
                             if (!nomeUsuario.Equals(""))
                             {
-                                <li><a class="text-light bg-transparent">Olá, @nomeUsuario</a> </li>
+                                <li><a class="text-light bg-transparent" asp-area="" asp-controller="@tipoUsuario" asp-action="Edit" asp-route-id="@idUsuario">Olá, @nomeUsuario</a> </li>
                                 <li><a class="text-light bg-transparent" asp-area="" asp-controller="Usuario" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
                             }}
                     </ul>

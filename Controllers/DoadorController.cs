@@ -93,9 +93,9 @@ namespace iSangue.Controllers
 
 
         // GET: Doador
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAdmin()
         {
-            if (usuarioSession.Equals("ADMINISTRADOR") || usuario.Equals("DOADOR"))
+            if (usuarioSession.Equals("ADMINISTRADOR"))
             {
                 return View(await Doador.GetDoadores());
             }
@@ -115,7 +115,7 @@ namespace iSangue.Controllers
 
             var doador = await Doador.GetDoadorById(id);
 
-            if (usuarioSession == "ADMINISTRADOR")
+            if (usuarioSession == "ADMINISTRADOR" || doador.email == emailSession)
             {
                 return View(doador);
             }
@@ -158,7 +158,7 @@ namespace iSangue.Controllers
             {
                 return NotFound();
             }
-            if (usuarioSession == "ADMINISTRADOR")
+            if (usuarioSession == "ADMINISTRADOR" || doador.email == emailSession)
             {
                 return View(doador);
             }
