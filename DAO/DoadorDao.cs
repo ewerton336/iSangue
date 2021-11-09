@@ -86,7 +86,7 @@ namespace iSangue.DAO
         }
 
 
-        public async Task<Doador> GetDoadorByUserID(int id, string tipoUsuario)
+        public async Task<Doador> GetDoadorByUserID(int id)
         {
             try
             {
@@ -164,25 +164,7 @@ namespace iSangue.DAO
             }
         }
 
-        public async Task<Doador> LoginDoador(string email, string senha)
-        {
-            try
-            {
-                var sql = @"SELECT EMAIL
-                        ,SENHA
-                        FROM USUARIO
-                        WHERE EMAIL = @EMAIL
-                        AND SENHA = @SENHA";
-                var execute = await DbConnection.QueryFirstAsync<Doador>(sql, new { EMAIL = email, SENHA = senha });
-                DbConnection.Close();
-                return execute;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
+     
 
 
         public async Task AtualizarDoador(Doador doador)
@@ -218,8 +200,16 @@ namespace iSangue.DAO
         }
 
 
-
-
-
+        public async Task CadastradrDoadorNoEvento(int idDoador, int idEvento)
+        {
+            var sql = @"UPDATE DOADOR
+                        SET EVENTO_ID = @IDEVENTO
+                        WHERE ID = @IDDOADOR";
+            await DbConnection.ExecuteAsync(sql, new
+            {
+                IDEVENTO = idEvento,
+                IDDOADOR = idDoador
+            });
+        }
     }
 }

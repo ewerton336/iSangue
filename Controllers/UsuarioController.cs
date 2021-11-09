@@ -151,15 +151,25 @@ namespace iSangue.Controllers
 
         public async Task<IActionResult> LoginSucess(Usuario usuario)
         {
+            
+            switch (usuario.tipoUsuario)
+            {
+                case "DOADOR":
+                    var doador  = await Doador.GetDoadorByUserID(usuario.id);
+                    HttpContext.Session.SetString("ID_DOADOR", doador.idDoador.ToString());
+                    break;
+            }
+
 
             ViewBag.nome = "Indefinido";
-
+            
             var nome = await Usuario.GetNomeByUserId(usuario.id, usuario.tipoUsuario);
 
             HttpContext.Session.SetString("TIPO_USUARIO", usuario.tipoUsuario);
             HttpContext.Session.SetString("NOME_USUARIO", nome);
             HttpContext.Session.SetString("EMAIL_USUARIO", usuario.email);
             HttpContext.Session.SetString("ID_USUARIO", usuario.id.ToString());
+
             return View("LoginSucess");
         }
 

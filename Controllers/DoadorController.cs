@@ -230,6 +230,7 @@ namespace iSangue.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool DoadorExists(int id)
         {
             return _context.Doador.Any(e => e.id == id);

@@ -2,7 +2,6 @@
 @{ var tipoUsuario = Context.Session.GetString("TIPO_USUARIO") == null ? "" : Context.Session.GetString("TIPO_USUARIO");
     var nomeUsuario = Context.Session.GetString("NOME_USUARIO") == null ? "" : Context.Session.GetString("NOME_USUARIO");
     var idUsuario = Context.Session.GetString("ID_USUARIO") == null ? "" : Context.Session.GetString("ID_USUARIO");
-    var editPage = idUsuario.Equals("") ? "" : "Edit/" + idUsuario;
 
 }
 <!DOCTYPE html>

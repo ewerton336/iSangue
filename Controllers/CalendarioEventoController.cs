@@ -17,6 +17,7 @@ namespace iSangue.Controllers
         private CalendarioEventoDao calendarioEventoDao;
         private EntidadeColetoraDao entidadeColetoraDao;
         private CedenteLocalDao cedenteLocalDao;
+        private DoadorDao doadorDao;
 
         public CalendarioEventoController(iSangueContext context)
         {
@@ -67,6 +68,22 @@ namespace iSangue.Controllers
             set
             {
                 cedenteLocalDao = value;
+            }
+        }
+
+        DoadorDao Doador
+        {
+            get
+            {
+                if (doadorDao == null)
+                {
+                    doadorDao = new DoadorDao(Helper.DBConnectionSql);
+                }
+                return doadorDao;
+            }
+            set
+            {
+                doadorDao = value;
             }
         }
 
@@ -174,14 +191,13 @@ namespace iSangue.Controllers
         // POST: CalendarioEvento/InscricaoEvento
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> InscricaoEvento([Bind("id,nomeEvento,dataEvento,quantidadeInteressados,entidadeColetoraID,cedenteLocalID")] CalendarioEvento calendarioEvento)
+       
+        public async Task<IActionResult> InscricaoEvento([Bind("id, cedenteLocalID")] CalendarioEvento evento)
         {
-            if (ModelState.IsValid)
-            {
-                await CalendarioEvento.InserirEvento(calendarioEvento);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(calendarioEvento);
+            //o id do cedenteLocal é o id do doador
+
+            await Doador.CadastradrDoadorNoEvento(evento.cedenteLocalID, evento.id);
+            return View("CadastradoNoEvento");
         }
 
 

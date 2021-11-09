@@ -1,0 +1,14 @@
+﻿@model iSangue.Models.Doador
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Cadastrado no evento com sucesso!";
+
+    var nomeUsuario = Context.Session.GetString("NOME_USUARIO");
+}
+
+
+
+<h3> Obrigado @nomeUsuario!</h3>
+
+
+<h3 class="bg-success"> Você se inscreveu no evento com sucesso!</h3>
