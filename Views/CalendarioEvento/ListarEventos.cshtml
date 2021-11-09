@@ -49,7 +49,7 @@
                             <th scope="col">Local</th>
                             <th scope="col">Endereço</th>
                             <th scope="col">Doadores</th>
-                            <th class="text-center" scope="col">Detalhes</th>
+                            <th class="text-center" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +75,10 @@
                                     TODO
                                 </td>
                                 <td>
-                                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-primary btn active text-center" role="button">Inscrever-se</a>
+                                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-primary" role="button">Inscrever-se</a>
+                                </td>
+                                <td>
+                                    <a asp-action="DetalhesEvento" asp-route-id="@item.id" class="btn btn-info" role="button">Detalhes</a>
                                 </td>
                             </tr>
 

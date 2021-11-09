@@ -117,6 +117,24 @@ namespace iSangue.Controllers
             return View(evento);
         }
 
+
+        public async Task<IActionResult> DetalhesEvento(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var evento = await CalendarioEvento.GetEventoById(id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            return View(evento);
+        }
+
         // GET: CalendarioEvento/Create
         public IActionResult Create()
         {
@@ -125,6 +143,7 @@ namespace iSangue.Controllers
             return View();
         }
 
+      
         // POST: CalendarioEvento/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -137,6 +156,36 @@ namespace iSangue.Controllers
             }
             return View(calendarioEvento);
         }
+
+        // GET: CalendarioEvento/InscricaoEvento
+        public async Task <IActionResult> InscricaoEvento(int id)
+        {
+            var evento = await CalendarioEvento.GetEventoById(id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            return View(evento);
+        }
+
+
+        // POST: CalendarioEvento/InscricaoEvento
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> InscricaoEvento([Bind("id,nomeEvento,dataEvento,quantidadeInteressados,entidadeColetoraID,cedenteLocalID")] CalendarioEvento calendarioEvento)
+        {
+            if (ModelState.IsValid)
+            {
+                await CalendarioEvento.InserirEvento(calendarioEvento);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(calendarioEvento);
+        }
+
+
+
 
         // GET: CalendarioEvento/Edit/5
         public async Task<IActionResult> Edit(int id)
