@@ -144,7 +144,17 @@ namespace iSangue.Controllers
                 await Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
                 int idCriada = await Usuario.getIdByEmail(doador.email);
                 await Doador.InserirDoador(doador, idCriada);
-                return RedirectToAction(nameof(Index));
+
+                //após cadastro atribuir os dados criados na session
+                var doador2 = await Doador.GetDoadorByUserID(idCriada);
+                HttpContext.Session.SetString("ID_DOADOR", doador2.idDoador.ToString());
+                HttpContext.Session.SetString("TIPO_USUARIO", "DOADOR");
+                HttpContext.Session.SetString("NOME_USUARIO", doador.nome);
+                HttpContext.Session.SetString("EMAIL_USUARIO", doador.email);
+                HttpContext.Session.SetString("ID_USUARIO", idCriada.ToString());
+
+                return Redirect("../Home/Index"); ;
+
             }
 
             return View(doador);

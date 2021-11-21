@@ -35,5 +35,6 @@ namespace iSangue.Models
 
         [Display(Name = "Local")]
         public CedenteLocal cedenteLocal { get; set; }
+
     }
 }

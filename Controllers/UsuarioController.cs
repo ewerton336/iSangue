@@ -70,7 +70,7 @@ namespace iSangue.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return Redirect("../Home/Index"); ;
             }
             catch
             {

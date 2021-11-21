@@ -211,5 +211,14 @@ namespace iSangue.DAO
                 IDDOADOR = idDoador
             });
         }
-    }
+
+        public async Task<int> GetQuantidadeDoadoresEvento (int idEvento)
+        {
+            var sql = @"select ID from doador d where d.EVENTO_ID = @IDEVENTO";
+            var result = await DbConnection.QueryAsync<Doador>(sql, new { IDEVENTO = idEvento });
+            var contador = result.ToList();
+            return contador.Count();
+        }
+
+}
 }

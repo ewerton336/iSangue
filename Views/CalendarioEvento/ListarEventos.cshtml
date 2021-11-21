@@ -48,7 +48,7 @@
                             <th scope="col">Entidade Coletora</th>
                             <th scope="col">Local</th>
                             <th scope="col">Endereço</th>
-                            <th scope="col">Doadores</th>
+                            <th scope="col">Quantidade de Interessados</th>
                             <th class="text-center" scope="col"></th>
                         </tr>
                     </thead>
@@ -72,7 +72,7 @@
                                     @Html.DisplayFor(modelItem => item.cedenteLocal.endereco)
                                 </td>
                                 <td>
-                                    TODO
+                                    @Html.DisplayFor(modelItem => item.quantidadeInteressados)
                                 </td>
                                 <td>
                                     <a asp-action="InscricaoEvento" asp-route-id="@item.id" class="btn btn-primary" role="button">Inscrever-se</a>

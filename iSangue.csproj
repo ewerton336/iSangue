@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\img\Ewrton.png" />
-    <Content Remove="wwwroot\img\Pedro.png" />
-    <Content Remove="wwwroot\img\Rogerio.png" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <Folder Include="Views\Administrador\" />
 	  <Folder Include="Views\Administrador\" />
   </ItemGroup>
@@ -29,10 +23,6 @@
     <PackageReference Include="MySql.Data" Version="8.0.26" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.2" />
     <None Include="wwwroot\css\style.css" />
-    <None Include="wwwroot\img\estrelinhas.png" />
-    <None Include="wwwroot\img\Ewrton.png" />
-    <None Include="wwwroot\img\Pedro.png" />
-    <None Include="wwwroot\img\Rogerio.png" />
   </ItemGroup>
 
 </Project>

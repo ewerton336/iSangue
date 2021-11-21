@@ -12,10 +12,12 @@ namespace iSangue.Models
         [Display(Name = "ID de usuário")]
         public int id { get; set; }
 
+        [Required]
         [Display(Name = "E-mail")]
         [DataType(DataType.EmailAddress)]
         public string email { get; set; }
 
+        [Required]
         [Display(Name = "Senha")]
         [DataType(DataType.Password)]
         public string senha { get; set; }

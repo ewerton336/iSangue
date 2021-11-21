@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using iSangue.Data;
 using iSangue.Models;
 using iSangue.DAO;
+using Microsoft.AspNetCore.Http;
 
 namespace iSangue.Controllers
 {
@@ -95,6 +96,7 @@ namespace iSangue.Controllers
             IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
             foreach (var evento in eventos)
             {
+                evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
                 evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
                 evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
             }
@@ -110,6 +112,7 @@ namespace iSangue.Controllers
             IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
             foreach (var evento in eventos)
             {
+                evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
                 evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
                 evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
             }
@@ -177,14 +180,22 @@ namespace iSangue.Controllers
         // GET: CalendarioEvento/InscricaoEvento
         public async Task <IActionResult> InscricaoEvento(int id)
         {
-            var evento = await CalendarioEvento.GetEventoById(id);
-
-            if (evento == null)
+            var tipoUsuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
+            if (tipoUsuario.Equals("DOADOR"))
             {
-                return NotFound();
-            }
+                var evento = await CalendarioEvento.GetEventoById(id);
 
-            return View(evento);
+                if (evento == null)
+                {
+                    return NotFound();
+                }
+
+                return View(evento);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
 
