@@ -182,14 +182,10 @@ namespace iSangue.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-
-
-
-
-
-
-
-
+        public async Task<IActionResult> ErrorUsuarioJaExistente()
+        {
+            return View();
+        }
 
 
     }

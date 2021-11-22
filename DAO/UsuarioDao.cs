@@ -14,7 +14,7 @@ namespace iSangue.DAO
         {
         }
 
-        public async Task<int> InserirUsuario( string email, string senha, string tipoUsuario)
+        public async Task<int> InserirUsuario(string email, string senha, string tipoUsuario)
         {
             var sql = @"INSERT INTO USUARIO(
                             EMAIL 
@@ -24,11 +24,11 @@ namespace iSangue.DAO
                             @EMAIL 
                             ,@SENHA
                             ,@TIPO_USUARIO)";
-            var execute = await DbConnection.ExecuteAsync(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario});
+            var execute = await DbConnection.ExecuteAsync(sql, new { EMAIL = email, SENHA = senha, TIPO_USUARIO = tipoUsuario });
             return execute;
         }
 
-        public async Task<int> getIdByEmail (string email)
+        public async Task<int> getIdByEmail(string email)
         {
             var sql = @"SELECT ID FROM USUARIO WHERE EMAIL = @EMAIL";
             var result = await DbConnection.QueryFirstOrDefaultAsync<int>(sql, new { EMAIL = email });
@@ -39,7 +39,7 @@ namespace iSangue.DAO
         public async Task Delete(int id)
         {
             string sql = "DELETE FROM USUARIO WHERE ID = @ID";
-           await DbConnection.ExecuteAsync(sql, new { ID = id });
+            await DbConnection.ExecuteAsync(sql, new { ID = id });
         }
 
         public async Task<Usuario> LoginUsuario(string email, string senha)
@@ -126,6 +126,12 @@ namespace iSangue.DAO
 
         }
 
+
+        public async Task<string> VerificarUsuarioExistente(string email)
+        {
+            var sql = @"SELECT EMAIL FROM USUARIO WHERE EMAIL = @EMAIL";
+            return await DbConnection.QueryFirstOrDefaultAsync<string>(sql, new { EMAIL = email });
+        }
 
     }
 }

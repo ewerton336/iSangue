@@ -141,6 +141,8 @@ namespace iSangue.Controllers
         {
             if (ModelState.IsValid)
             {
+                var usuario =  await Usuario.VerificarUsuarioExistente(doador.email);
+                if (usuario != null) return Redirect("../Usuario/ErrorUsuarioJaExistente");
                 await Usuario.InserirUsuario(doador.email, doador.senha, "DOADOR");
                 int idCriada = await Usuario.getIdByEmail(doador.email);
                 await Doador.InserirDoador(doador, idCriada);
