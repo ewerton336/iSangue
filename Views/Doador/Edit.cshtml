@@ -14,12 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="nome" class="control-label"></label>
-                <input asp-for="nome" class="form-control" />
+                <input asp-for="nome" class="form-control" required maxlength="100" />
                 <span asp-validation-for="nome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="sobrenome" class="control-label"></label>
-                <input asp-for="sobrenome" class="form-control" />
+                <input asp-for="sobrenome" class="form-control" required maxlength="100"/>
                 <span asp-validation-for="sobrenome" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
-                <input asp-for="telefone" type="tel" class="form-control" pattern="[0-9]{11}" />
+                <input asp-for="telefone" type="text" class="form-control" pattern="[0-9]{12}" maxlength="12" min="0" required title="Insira um telefone válido.">
                 <span asp-validation-for="telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -70,7 +70,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="senha" class="control-label"></label>
-                <input asp-for="senha" class="form-control" />
+                <input asp-for="senha" class="form-control"  required maxlength="50" />
                 <span asp-validation-for="senha" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -81,7 +81,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-info" asp-action="../">Voltar</a>
 </div>
 
 @section Scripts {

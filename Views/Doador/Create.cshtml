@@ -29,9 +29,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
-                <input asp-for="telefone" type="tel" class="form-control" pattern="[0-9]{11}" maxlength="11" min="0" />
+                <input asp-for="telefone" type="text" class="form-control" pattern="[0-9]{12}" maxlength="12" min="0" required title="Insira um telefone válido.">
                 <span asp-validation-for="telefone" class="text-danger"></span>
-            </div>
+            </div>  
             <div class="form-group">
                 <label asp-for="cidadeDoacao" class="control-label"></label>
                 <select class="form-control" asp-for="cidadeDoacao">
@@ -64,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="email" class="control-label"></label>
-                <input asp-for="email" type="email" class="form-control" required maxlength="100" />
+                <input asp-for="email" type="email" class="form-control" required maxlength="100"/>
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
