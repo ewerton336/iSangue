@@ -30,16 +30,16 @@
             @Html.DisplayFor(model => model.quantidadeInteressados)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.entidadeColetoraID)
+            Entidade Coletora
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.entidadeColetoraID)
+            @Html.DisplayFor(model => model.entidadeColetora.nome)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.cedenteLocalID)
+            Endereço
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.cedenteLocalID)
+            @Html.DisplayFor(model => model.cedenteLocal.endereco) (@Html.DisplayFor(model => model.cedenteLocal.nome))
         </dd>
     </dl>
 
@@ -49,6 +49,6 @@
     </form>
 </div>
 <div>
-
-    <a asp-action="Index">Voltar</a>
+    <br />
+    <a class="btn btn-info" asp-action="ListarEventos">Voltar</a>
 </div>

@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #E15153; ">
+        <nav class="navbar navbar-expand navbar-dark" style="background-color: #E15153; ">
             <div class="container">
                 <img class="img-fluid" src="~/img/isangue-logo.png" alt="Card image cap" style="width: 25px;height: 25px">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">iSangue</a>
@@ -60,24 +60,6 @@
                             }
                         }
 
-                        @{
-                            if (tipoUsuario.Equals("ADMINISTRADOR"))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-light dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Doador
-                                    </a>
-                                    <div class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="IndexAdmin">Listar (Administrador)</a>
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Create">Cadastro</a>
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Editar</a>
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Detalhes</a>
-                                        <a class="dropdown-item text-dark bg-transparent" asp-area="" asp-controller="Doador" asp-action="Index">Deletar</a>
-                                    </div>
-                                </li>
-                            }
-                        }
 
                         @{
                             if (tipoUsuario.Equals("ENTIDADE_COLETORA") || tipoUsuario.Equals("ADMINISTRADOR"))

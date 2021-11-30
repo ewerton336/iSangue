@@ -19,6 +19,7 @@ namespace iSangue.Controllers
         private EntidadeColetoraDao entidadeColetoraDao;
         private CedenteLocalDao cedenteLocalDao;
         private DoadorDao doadorDao;
+        private string usuario;
 
         public CalendarioEventoController(iSangueContext context)
         {
@@ -88,20 +89,38 @@ namespace iSangue.Controllers
             }
         }
 
+        private string usuarioSession
+        {
+            get
+            {
+                if (usuario == null)
+                {
+                    usuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
+                }
+                return usuario;
+            }
+
+            set
+            {
+                usuario = value;
+            }
+        }
 
         // GET: CalendarioEvento
         public async Task<IActionResult> Index()
         {
-
-            IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
-            foreach (var evento in eventos)
+            if (usuarioSession == "ADMINISTRADOR")
             {
-                evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
-                evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
-                evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
+                IEnumerable<CalendarioEvento> eventos = await CalendarioEvento.GetCalendariosEventos();
+                foreach (var evento in eventos)
+                {
+                    evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
+                    evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                    evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
+                }
+                return View(eventos);
             }
-            
-            return View(eventos);
+            else return NotFound();
         }
 
 
@@ -146,10 +165,15 @@ namespace iSangue.Controllers
             }
 
             var evento = await CalendarioEvento.GetEventoById(id);
-
             if (evento == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
+                evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
             }
 
             return View(evento);
@@ -163,7 +187,7 @@ namespace iSangue.Controllers
             return View();
         }
 
-      
+
         // POST: CalendarioEvento/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -178,19 +202,29 @@ namespace iSangue.Controllers
         }
 
         // GET: CalendarioEvento/InscricaoEvento
-        public async Task <IActionResult> InscricaoEvento(int id)
+        public async Task<IActionResult> InscricaoEvento(int id)
         {
             var tipoUsuario = HttpContext.Session.GetString("TIPO_USUARIO") == null ? "" : HttpContext.Session.GetString("TIPO_USUARIO");
             if (tipoUsuario.Equals("DOADOR"))
             {
-                var evento = await CalendarioEvento.GetEventoById(id);
-
-                if (evento == null)
+                if (id == 0)
                 {
                     return NotFound();
                 }
 
-                return View(evento);
+                var evento = await CalendarioEvento.GetEventoById(id);
+                if (evento == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    evento.quantidadeInteressados = await Doador.GetQuantidadeDoadoresEvento(evento.id);
+                    evento.entidadeColetora = await EntidadeColetora.GetEntidadeById(evento.entidadeColetoraID);
+                    evento.cedenteLocal = await CedenteLocal.GetCedenteById(evento.cedenteLocalID);
+                    return View(evento);
+                }
+                
             }
             else
             {
@@ -202,7 +236,7 @@ namespace iSangue.Controllers
         // POST: CalendarioEvento/InscricaoEvento
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+
         public async Task<IActionResult> InscricaoEvento([Bind("id, cedenteLocalID")] CalendarioEvento evento)
         {
             //o id do cedenteLocal é o id do doador

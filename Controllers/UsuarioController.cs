@@ -70,7 +70,7 @@ namespace iSangue.Controllers
         {
             try
             {
-                return Redirect("../Home/Index"); ;
+                return Redirect("../Home/Index"); 
             }
             catch
             {
@@ -179,7 +179,7 @@ namespace iSangue.Controllers
             HttpContext.Session.Remove("NOME_USUARIO");
             HttpContext.Session.Remove("EMAIL_USUARIO");
             HttpContext.Session.Remove("ID_USUARIO");
-            return RedirectToAction(nameof(Login));
+            return Redirect("../Home/Index");
         }
 
         public async Task<IActionResult> ErrorUsuarioJaExistente()
