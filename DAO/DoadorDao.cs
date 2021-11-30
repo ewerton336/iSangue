@@ -71,7 +71,7 @@ namespace iSangue.DAO
                                 FROM DOADOR D 
                                 inner join usuario U 
                                 on D.USUARIO_ID  = U.ID 
-                                where D.ID = @ID";
+                                where D.USUARIO_ID = @ID";
 
                 var result = await DbConnection.QueryFirstOrDefaultAsync<Doador>(SQL, new { ID = id });
                 DbConnection.Close();

@@ -1,10 +1,10 @@
 ﻿@model iSangue.Models.Doador
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastro Doador";
 }
 
-<h1>Create</h1>
+<h1>Cadastro</h1>
 
 <h4>Doador</h4>
 <hr />
@@ -14,12 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="nome" class="control-label"></label>
-                <input asp-for="nome" class="form-control" required />
+                <input asp-for="nome" class="form-control" required maxlength="100" />
                 <span asp-validation-for="nome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="sobrenome" class="control-label"></label>
-                <input asp-for="sobrenome" class="form-control" required />
+                <input asp-for="sobrenome" class="form-control" required maxlength="100" />
                 <span asp-validation-for="sobrenome" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="telefone" class="control-label"></label>
-                <input asp-for="telefone" type="tel" class="form-control" pattern="[0-9]{11}" />
+                <input asp-for="telefone" type="tel" class="form-control" pattern="[0-9]{11}" maxlength="11" min="0" />
                 <span asp-validation-for="telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -62,25 +62,19 @@
                 </select>
                 <span asp-validation-for="tipoSanguineo" class="text-danger"></span>
             </div>
-
-
-
-
-
-
             <div class="form-group">
                 <label asp-for="email" class="control-label"></label>
-                <input asp-for="email" type="email" class="form-control" req />
+                <input asp-for="email" type="email" class="form-control" required maxlength="100" />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="senha" class="control-label"></label>
-                <input asp-for="senha" class="form-control" req />
+                <input asp-for="senha" class="form-control" required maxlength="50" />
                 <span asp-validation-for="senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            <br /><br /></div>
         </form>
     </div>
 </div>
