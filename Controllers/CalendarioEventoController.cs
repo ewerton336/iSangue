@@ -242,7 +242,7 @@ namespace iSangue.Controllers
             //o id do cedenteLocal é o id do doador
 
             await Doador.CadastradrDoadorNoEvento(evento.cedenteLocalID, evento.id);
-            return View("CadastradoNoEvento");
+            return View("CadastradoEventoSucesso");
         }
 
 
