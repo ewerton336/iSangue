@@ -210,7 +210,7 @@ namespace iSangue.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAdmin));
             }
             return View(doador);
         }
@@ -237,9 +237,9 @@ namespace iSangue.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doador = Doador.GetDoadorById(id);
-            await Usuario.Delete(doador.Id);
-            return RedirectToAction(nameof(Index));
+            var doador = Doador.GetDoadorById(id).Result;
+            await Usuario.Delete(doador.id);
+            return RedirectToAction(nameof(IndexAdmin));
         }
 
 
