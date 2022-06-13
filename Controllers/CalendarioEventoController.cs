@@ -362,10 +362,10 @@ namespace iSangue.Controllers
             var detalhesEvento = await CalendarioEvento.GetEventoById(id);
             detalhesEvento.cedenteLocal = await CedenteLocal.GetCedenteById(detalhesEvento.cedenteLocalID);
             detalhesEvento.entidadeColetora = await EntidadeColetora.GetEntidadeById(detalhesEvento.entidadeColetoraID);
-            mail.Subject = "Doação de Sangue - Evento confirmado com data de Coleta Deinida!";
+            mail.Subject = "Doação de Sangue - Evento confirmado com data de Coleta Definida!";
             mail.Body = @$"Olá! Estamos muito felizes em informar que em breve haverá coleta no evento de Doação de sangue que você está inscrito(a). <br>
             Segue os detalhes do evento <br>
-            Data:{detalhesEvento.dataEvento};
+            Data: {detalhesEvento.dataEvento};
             Local: {detalhesEvento.cedenteLocal.nome} <br>
             Endereço: {detalhesEvento.cedenteLocal.endereco}
             Entidade Coletora: {detalhesEvento.entidadeColetora.nome} <br>
