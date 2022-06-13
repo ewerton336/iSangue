@@ -53,9 +53,10 @@
                         @Html.DisplayFor(modelItem => item.cedenteLocal.nome)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                         <a asp-action="DispararEmails" asp-route-id="@item.id">Enviar email aos doadores</a> |
+                        <a asp-action="Edit" asp-route-id="@item.id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Deletar</a>
                     </td>
                 </tr>
             }

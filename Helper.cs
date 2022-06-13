@@ -10,25 +10,23 @@ namespace iSangue
 {
     public class Helper
     {
+        private static MySqlConnection SQLConn;
         public static string _ambiente { get; set; }
 
         public Helper(string  ambiente)
         {
             ambiente = _ambiente;
         }
-       /* public static System.Data.IDbConnection DBConnectionOracle
-        {
-            get
-            {
-                return new Oracle.ManagedDataAccess.Client.OracleConnection(_ambiente);
-            }
-        }*/
-
         public static MySqlConnection DBConnectionSql
         {
             get 
             {
-                return new MySqlConnection(_ambiente);
+                if (SQLConn == null)
+                {
+                    SQLConn = new MySqlConnection(_ambiente);
+                }
+
+                return SQLConn;
             }
         }
 

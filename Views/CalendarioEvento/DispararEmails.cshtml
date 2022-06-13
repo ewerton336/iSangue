@@ -1,0 +1,77 @@
+﻿@model IEnumerable<iSangue.Models.Doador>
+
+@{
+    ViewData["Title"] = "Disparar Emails";
+    var idEvento = ViewBag.idEvento;
+}
+
+<h1>Deseja enviar o email de notificação aos doadores abaixo?</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sobrenome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataNasc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cidadeDoacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoSanguineo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoUsuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sobrenome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataNasc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cidadeDoacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoSanguineo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoUsuario)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+     <form asp-action="DispararEmails">
+        <input type="hidden" asp-for="@idEvento" />
+        <input type="submit" value="Enviar email" class="btn btn-primary" /> |
+        <a asp-action="CalendarioEvento">Voltar</a>
+    </form>

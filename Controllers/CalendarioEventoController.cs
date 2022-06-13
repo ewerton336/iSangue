@@ -9,6 +9,8 @@ using iSangue.Data;
 using iSangue.Models;
 using iSangue.DAO;
 using Microsoft.AspNetCore.Http;
+using System.Net.Mail;
+using System.Net;
 
 namespace iSangue.Controllers
 {
@@ -321,6 +323,77 @@ namespace iSangue.Controllers
         private bool CalendarioEventoExists(int id)
         {
             return _context.CalendarioEvento.Any(e => e.id == id);
+        }
+
+
+        // GET: CalendarioEvento/DispararEmails/5
+        public async Task<IActionResult> DispararEmails(int id)
+        {
+           var doadores = await Doador.GetDoadoresEvento(id);
+
+            if (doadores == null)
+            {
+                return NotFound();
+            }
+            ViewBag.idEvento = id;
+            return View(doadores);
+        }
+
+        // POST: CalendarioEvento/DispararEmails/5
+        [HttpPost, ActionName("DispararEmails")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EvniarEmailsUsuarios(int id)
+        {
+            var doadores = await Doador.GetDoadoresEvento(id);
+
+            #region configurações do email
+
+            //cria uma mensagem
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("contato.isangue@outlook.com")
+            };
+
+            //adiciona o email dos doadores interessados na lista de emails a enviar
+            foreach (var doador in doadores)
+            {
+                mail.To.Add(doador.email);
+            }
+            var detalhesEvento = await CalendarioEvento.GetEventoById(id);
+            detalhesEvento.cedenteLocal = await CedenteLocal.GetCedenteById(detalhesEvento.cedenteLocalID);
+            detalhesEvento.entidadeColetora = await EntidadeColetora.GetEntidadeById(detalhesEvento.entidadeColetoraID);
+            mail.Subject = "Doação de Sangue - Evento confirmado com data de Coleta Deinida!";
+            mail.Body = @$"Olá! Estamos muito felizes em informar que em breve haverá coleta no evento de Doação de sangue que você está inscrito(a). <br>
+            Segue os detalhes do evento <br>
+            Data:{detalhesEvento.dataEvento};
+            Local: {detalhesEvento.cedenteLocal.nome} <br>
+            Endereço: {detalhesEvento.cedenteLocal.endereco}
+            Entidade Coletora: {detalhesEvento.entidadeColetora.nome} <br>
+            Obs: Não se esqueça de comparecer na data informada munido de documentos. <br>
+            Obrigado por fazer parte da comunidade iSangue!";
+            mail.IsBodyHtml = true;
+
+
+            //configurações stmp
+            SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
+          
+            // inclui as credenciais
+            client.UseDefaultCredentials = false;
+            NetworkCredential cred = new NetworkCredential("contato.isangue@outlook.com", "isangue123");
+            client.EnableSsl = true;
+            client.Credentials = cred;
+
+            await client.SendMailAsync(mail);
+
+            #endregion
+            return RedirectToAction(nameof(EmailSucesso));
+        }
+
+
+        // GET: CalendarioEvento/DispararEmails/5
+        public async Task<IActionResult> EmailSucesso()
+        {
+            return View();
         }
     }
 }

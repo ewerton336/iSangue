@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using Dapper;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using iSangue.Models;
 using MySqlConnector;
@@ -220,5 +218,27 @@ namespace iSangue.DAO
             return contador.Count();
         }
 
-}
+        public async Task<IEnumerable<Doador>> GetDoadoresEvento(int idEvento)
+        {
+            var sql = @"SELECT
+                                D.ID idDoador
+                                ,D.NOME nome
+                                ,D.SOBRENOME sobrenome
+                                ,D.DT_NASCIMENTO dataNasc
+                                ,D.TELEFONE telefone
+                                ,D.CIDADE_DOACAO cidadeDoacao
+                                ,D.TIPO_SANGUINEO tipoSanguineo
+                                ,U.ID 
+                                ,U.EMAIL 
+                               -- ,U.SENHA
+                                ,U.TIPO_USUARIO tipoUsuario
+                                FROM DOADOR D
+                                inner join usuario U 
+                                on D.USUARIO_ID  = U.ID 
+                                where D.EVENTO_ID = @IDEVENTO";
+            var result = await DbConnection.QueryAsync<Doador>(sql, new { IDEVENTO = idEvento });
+            return result;
+        }
+
+    }
 }
