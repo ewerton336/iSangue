@@ -22,7 +22,7 @@ namespace iSangue.Models
         public string dataNasc { get; set; }
 
         [Display(Name = "Telefone")]
-        public int telefone { get; set; }
+        public long telefone { get; set; }
 
         [Display(Name = "Cidade de Doação")]
         public string cidadeDoacao { get; set; }
